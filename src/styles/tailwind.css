@@ -1,0 +1,231 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* Tailwind Core layers first */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ----------------------
+   Base Styles
+----------------------- */
+@layer base {
+  :root {
+    /* Color Palette */
+    --color-background: #FAFAFA;
+    --color-foreground: #2D2D2D;
+    --color-border: #E5E5E5;
+    --color-card: #FFFFFF;
+    --color-card-foreground: #2D2D2D;
+    --color-primary: #e57b46;
+    --color-primary-foreground: #FFFFFF;
+    --color-secondary: #B9AEDF;
+    --color-secondary-foreground: #1A1A32;
+    --color-accent: #88E5BE;
+    --color-accent-foreground: #1A1A32;
+    --color-success: #88E5BE;
+    --color-success-foreground: #1A1A32;
+    --color-warning: #F4A261;
+    --color-warning-foreground: #1A1A32;
+    --color-error: #E76F51;
+    --color-error-foreground: #FFFFFF;
+    --color-destructive: #E76F51;
+    --color-destructive-foreground: #FFFFFF;
+    --color-surface: #2A2A42;
+    --color-surface-foreground: #FFFFFF;
+    --color-dark: #1A1A32;
+    --color-dark-foreground: #FFFFFF;
+    --color-text-primary: #e57b46;
+    --color-text-secondary: #B8B8C8;
+    --color-cta: #E85A4F;
+    --color-cta-foreground: #FFFFFF;
+
+    /* Gradients */
+    --gradient-primary-start: #DD734F;
+    --gradient-primary-end: #1A1A32;
+    --gradient-secondary-start: #B9AEDF;
+    --gradient-secondary-end: #1A1A32;
+    --gradient-accent-start: #88E5BE;
+    --gradient-accent-end: #1A1A32;
+  }
+
+  /* Global styles */
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: 'Inter', sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* ----------------------
+   Components Layer
+----------------------- */
+@layer components {
+  /* Gradients */
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, var(--gradient-primary-start), var(--gradient-primary-end));
+  }
+  .bg-gradient-secondary {
+    background: linear-gradient(135deg, var(--gradient-secondary-start), var(--gradient-secondary-end));
+  }
+  .bg-gradient-accent {
+    background: linear-gradient(135deg, var(--gradient-accent-start), var(--gradient-accent-end));
+  }
+
+  /* Shadows */
+  .shadow-professional {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  }
+  .shadow-professional-lg {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08);
+  }
+  .shadow-professional-xl {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Animations */
+  .animate-ring-rotate {
+    animation: ring-rotate 2s linear infinite;
+  }
+  .animate-gradient-shift {
+    animation: gradient-shift 4s ease-in-out infinite;
+  }
+  .animate-elastic-hover {
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+  .animate-elastic-hover:hover {
+    transform: scale(1.05);
+  }
+
+  /* Gradient Border */
+  .border-gradient {
+    border: 1px solid;
+    border-image: linear-gradient(135deg, var(--color-secondary) 0%, transparent 100%) 1;
+  }
+}
+
+/* ----------------------
+   Utilities Layer
+----------------------- */
+@layer utilities {
+  .text-text-primary {
+    color: var(--color-text-primary);
+  }
+  .text-text-secondary {
+    color: var(--color-text-secondary);
+  }
+  .bg-surface {
+    background-color: var(--color-surface);
+  }
+  .bg-dark {
+    background-color: var(--color-dark);
+  }
+  .bg-cta {
+    background-color: var(--color-cta);
+  }
+  .animate-fade-in-down {
+    animation: fade-in-down 0.5s ease-out forwards;
+  }
+  .animate-fade-in-up {
+    animation: fade-in-up 0.5s ease-out forwards;
+  }
+
+  /* Motion reduce */
+  .motion-reduce {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ----------------------
+   Keyframes
+----------------------- */
+@keyframes fade-in-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ring-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ----------------------
+   Responsive Typography
+----------------------- */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  h2 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+  h3 {
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+}
+
+/* ----------------------
+   Accessibility & High Contrast
+----------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-contrast: high) {
+  :root {
+    --color-border: #000000;
+    --color-foreground: #000000;
+    --color-background: #FFFFFF;
+  }
+}
