@@ -6,24 +6,50 @@ export async function handler(event, context) {
   }
 
   try {
-    const data = JSON.parse(event.body);
+    const data = (() => {
+      try { return JSON.parse(event.body || '{}'); } catch { return {}; }
+    })();
 
     if (!data.email || !data.firstName) {
       return { statusCode: 400, body: JSON.stringify({ error: 'Missing required fields (firstName, email)' }) };
     }
 
-    // Configure NodeMailer transporter
+    // read and trim env vars
+    const SMTP_HOST = (process.env.SMTP_HOST || 'smtp.gmail.com').trim();
+    const SMTP_PORT = parseInt((process.env.SMTP_PORT || '465').toString().trim(), 10);
+    const SMTP_SECURE = (process.env.SMTP_SECURE || (SMTP_PORT === 465 ? 'true' : 'false')).toString().trim() === 'true';
+    const SMTP_USER = (process.env.SMTP_USER || '').trim();
+    const SMTP_PASS = (process.env.SMTP_PASS || '').trim();
+
+    if (!SMTP_USER || !SMTP_PASS) {
+      console.error('SMTP credentials missing');
+      return { statusCode: 500, body: JSON.stringify({ error: 'Email service not configured' }) };
+    }
+
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.gmail.com',
-      port: parseInt(process.env.SMTP_PORT || '465', 10),
-      secure: process.env.SMTP_SECURE ? process.env.SMTP_SECURE === 'true' : true,
+      host: SMTP_HOST,
+      port: SMTP_PORT,
+      secure: SMTP_SECURE,
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
-      }
+        user: SMTP_USER,
+        pass: SMTP_PASS
+      },
+      tls: {
+        // allow self-signed / restricted hosts — remove in production if not needed
+        rejectUnauthorized: false
+      },
+      connectionTimeout: 10_000
     });
 
-    const toEmail = process.env.TO_EMAIL || 'your-email@example.com';
+    // verify transporter early to give clear error on auth/connect
+    try {
+      await transporter.verify();
+    } catch (verifyErr) {
+      console.error('SMTP verify failed:', verifyErr);
+      return { statusCode: 502, body: JSON.stringify({ error: 'Unable to connect to email server' }) };
+    }
+
+    const toEmail = (process.env.TO_EMAIL || 'startflyerads@gmail.com').trim();
     const subject = `New Strategy Session Request from ${data.firstName} ${data.lastName || ''}`;
 
     const html = `
@@ -43,7 +69,7 @@ export async function handler(event, context) {
     `;
 
     await transporter.sendMail({
-      from: `"${data.firstName} ${data.lastName || ''}" <${process.env.SMTP_USER}>`,
+      from: `"${data.firstName} ${data.lastName || ''}" <${SMTP_USER}>`,
       to: toEmail,
       subject,
       html,
@@ -67,6 +93,6 @@ ${data.description || 'N/A'}
     return { statusCode: 200, body: JSON.stringify({ ok: true }) };
   } catch (err) {
     console.error('sendEmail error:', err);
-    return { statusCode: 500, body: JSON.stringify({ error: err.message || 'Failed to send email' }) };
+    return { statusCode: 500, body: JSON.stringify({ error: (err && err.message) || 'Failed to send email' }) };
   }
 }
