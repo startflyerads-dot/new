@@ -17,43 +17,71 @@ const ServicesPreview = () => {
   const services = [
   {
     id: 1,
-    title: "Digital Transformation",
-    description: "Revolutionize your business processes with cutting-edge digital solutions that drive efficiency and growth.",
-    icon: "Zap",
-    image: "https://images.unsplash.com/photo-1735469157670-1212e570eadc",
-    imageAlt: "Modern office workspace with multiple computer monitors displaying data analytics dashboards and digital transformation metrics",
-    features: ["Process Automation", "Cloud Migration", "Data Analytics", "AI Integration"],
-    results: "300% ROI increase on average"
+    title: "Digital Marketing",
+    description: "Comprehensive digital marketing solutions to boost your online presence and drive measurable results.",
+    icon: "Megaphone",
+    image: "https://images.unsplash.com/photo-1557838923-2985c318be48",
+    imageAlt: "Digital marketing dashboard showing various social media and marketing metrics",
+    features: [
+      "Social Media Marketing",
+      "Google Ads & PPC",
+      "SEO Optimization",
+      "Email Marketing",
+      "WhatsApp Marketing",
+      "LinkedIn Ads"
+    ],
+    results: "200% average ROI for clients"
   },
   {
     id: 2,
-    title: "Strategic Consulting",
-    description: "Expert guidance to navigate complex business challenges and unlock new opportunities for sustainable growth.",
-    icon: "Target",
-    image: "https://images.unsplash.com/photo-1716703435453-a7733d600d68",
-    imageAlt: "Professional business meeting with consultants presenting strategic plans on whiteboard to executive team in modern conference room",
-    features: ["Market Analysis", "Growth Strategy", "Risk Assessment", "Performance Optimization"],
-    results: "85% client retention rate"
+    title: "Web Development",
+    description: "Custom, responsive, and scalable website solutions that deliver exceptional user experiences.",
+    icon: "Globe",
+    image: "https://images.unsplash.com/photo-1547658719-da2b51169166",
+    imageAlt: "Web development workspace with responsive design layouts",
+    features: [
+      "Custom Website Development",
+      "E-commerce Solutions",
+      "CMS Integration",
+      "Responsive Design",
+      "Performance Optimization",
+      "Website Maintenance"
+    ],
+    results: "98% client satisfaction rate"
   },
   {
     id: 3,
-    title: "Technology Solutions",
-    description: "Custom software development and technology implementation to streamline operations and enhance productivity.",
-    icon: "Code",
-    image: "https://images.unsplash.com/photo-1635181951411-882166210167",
-    imageAlt: "Software developers working on multiple screens with code editors and development tools in modern tech office environment",
-    features: ["Custom Development", "System Integration", "Mobile Apps", "Web Platforms"],
-    results: "50% faster delivery times"
+    title: "App Development",
+    description: "Native and cross-platform mobile applications that engage users and drive business growth.",
+    icon: "Smartphone",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c",
+    imageAlt: "Mobile app development process showing multiple device screens",
+    features: [
+      "iOS Development",
+      "Android Development",
+      "Cross-Platform Apps",
+      "UI/UX Design",
+      "App Testing",
+      "Maintenance & Support"
+    ],
+    results: "1M+ app downloads achieved"
   },
   {
     id: 4,
-    title: "Business Intelligence",
-    description: "Transform raw data into actionable insights that drive informed decision-making and competitive advantage.",
-    icon: "BarChart3",
-    image: "https://images.unsplash.com/photo-1724833256463-26b199dc1b69",
-    imageAlt: "Business intelligence dashboard displaying colorful charts, graphs and data visualizations on large monitor in corporate office",
-    features: ["Data Visualization", "Predictive Analytics", "Real-time Reporting", "KPI Dashboards"],
-    results: "40% better decision accuracy"
+    title: "Graphic Design",
+    description: "Creative visual solutions that strengthen your brand identity and communicate your message effectively.",
+    icon: "Pen",
+    image: "https://images.unsplash.com/photo-1572044162444-ad60f128bdea",
+    imageAlt: "Graphic design workspace with branding materials and design tools",
+    features: [
+      "Brand Identity Design",
+      "Logo Design",
+      "Marketing Materials",
+      "Social Media Graphics",
+      "Print Design",
+      "Motion Graphics"
+    ],
+    results: "500+ brands designed"
   }];
 
 

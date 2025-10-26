@@ -26,34 +26,38 @@ const ConsultationForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const industryOptions = [
-    { value: 'technology', label: 'Technology & Software' },
-    { value: 'healthcare', label: 'Healthcare & Medical' },
-    { value: 'finance', label: 'Financial Services' },
-    { value: 'retail', label: 'Retail & E-commerce' },
-    { value: 'manufacturing', label: 'Manufacturing' },
-    { value: 'education', label: 'Education' },
-    { value: 'nonprofit', label: 'Non-profit' },
-    { value: 'other', label: 'Other' }
-  ];
+const industryOptions = [
+  { value: '', label: 'Select Industry...', disabled: true },
+  { value: 'technology', label: 'Technology & Software' },
+  { value: 'healthcare', label: 'Healthcare & Medical' },
+  { value: 'finance', label: 'Financial Services' },
+  { value: 'retail', label: 'Retail & E-commerce' },
+  { value: 'manufacturing', label: 'Manufacturing' },
+  { value: 'education', label: 'Education' },
+  { value: 'nonprofit', label: 'Non-profit' },
+  { value: 'other', label: 'Other' }
+];
 
+
+  // Update service options for digital marketing
   const serviceOptions = [
-    { value: 'strategy', label: 'Business Strategy Consulting' },
-    { value: 'digital', label: 'Digital Transformation' },
-    { value: 'operations', label: 'Operations Optimization' },
-    { value: 'marketing', label: 'Marketing & Growth' },
-    { value: 'technology', label: 'Technology Implementation' },
-    { value: 'training', label: 'Training & Development' },
-    { value: 'audit', label: 'Business Audit' },
-    { value: 'custom', label: 'Custom Solution' }
+    { value: 'digital-marketing', label: 'Digital Marketing Strategy' },
+    { value: 'social-media', label: 'Social Media Marketing' },
+    { value: 'seo', label: 'SEO Optimization' },
+    { value: 'ppc', label: 'PPC & Google Ads' },
+    { value: 'content', label: 'Content Marketing' },
+    { value: 'email', label: 'Email Marketing' },
+    { value: 'analytics', label: 'Analytics & Reporting' },
+    { value: 'custom', label: 'Custom Marketing Solution' }
   ];
 
+  // Update budget options for marketing services
   const budgetOptions = [
-    { value: '10k-25k', label: '$10,000 - $25,000' },
-    { value: '25k-50k', label: '$25,000 - $50,000' },
-    { value: '50k-100k', label: '$50,000 - $100,000' },
-    { value: '100k-250k', label: '$100,000 - $250,000' },
-    { value: '250k+', label: '$250,000+' },
+    { value: '1k-3k', label: '$1,000 - $3,000 / month' },
+    { value: '3k-5k', label: '$3,000 - $5,000 / month' },
+    { value: '5k-10k', label: '$5,000 - $10,000 / month' },
+    { value: '10k+', label: '$10,000+ / month' },
+    { value: 'project', label: 'Project-based' },
     { value: 'discuss', label: 'Let\'s Discuss' }
   ];
 
@@ -114,57 +118,77 @@ const ConsultationForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    e?.preventDefault();
-    
-    if (!validateForm()) return;
+    e.preventDefault();
+    setErrors({});
+    if (!formData.firstName || !formData.email) {
+      setErrors(prev => ({ ...prev, form: 'Please provide name and email.' }));
+      return;
+    }
 
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    try {
+      const res = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      // safe parse: read text then try parse JSON
+      const text = await res.text();
+      let data;
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch (parseErr) {
+        data = { error: text || 'Invalid JSON response from server' };
+      }
+
+      if (!res.ok) {
+        setErrors(prev => ({ ...prev, form: data?.error || 'Submission failed' }));
+      } else {
+        setIsSubmitted(true);
+      }
+    } catch (err) {
+      setErrors(prev => ({ ...prev, form: err.message || 'Submission failed' }));
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isSubmitted) {
     return (
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-[#2A2A42]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
-            className="bg-white rounded-3xl shadow-professional-xl p-8 lg:p-12 text-center"
+            className="bg-white/10 backdrop-blur-lg rounded-3xl shadow-professional-xl p-8 lg:p-12 text-center border border-white/20"
           >
-            <div className="w-20 h-20 bg-success/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Icon name="CheckCircle" size={40} color="var(--color-success)" />
+            <div className="w-20 h-20 bg-[#e57b46]/20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Icon name="CheckCircle" size={40} className="text-[#e57b46]" />
             </div>
-            <h2 className="text-3xl font-bold text-foreground mb-4">Thank You!</h2>
-            <p className="text-lg text-muted-foreground mb-8">
-              Your consultation request has been received. Our team will review your information and contact you within 24 hours to schedule your personalized consultation.
+            <h2 className="text-3xl font-bold text-white mb-4">Thank You!</h2>
+            <p className="text-lg text-white/80 mb-8">
+              Your strategy session request has been received. Our digital marketing experts will review your information and contact you within 24 hours.
             </p>
-            <div className="bg-muted rounded-2xl p-6 mb-8">
-              <h3 className="font-semibold text-foreground mb-4">What happens next?</h3>
+            <div className="bg-white/5 rounded-2xl p-6 mb-8 border border-white/10">
+              <h3 className="font-semibold text-white mb-4">What happens next?</h3>
               <div className="space-y-3 text-left">
-                <div className="flex items-start space-x-3">
-                  <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-white text-sm font-bold">1</span>
+                {[
+                  "We'll analyze your current digital presence and prepare a customized strategy",
+                  "Our marketing expert will contact you to schedule a convenient time",
+                  "We'll conduct a comprehensive strategy session and provide actionable insights"
+                ].map((text, index) => (
+                  <div key={index} className="flex items-start space-x-3">
+                    <div className="w-6 h-6 bg-gradient-to-br from-[#e57b46] to-[#B9AEDF] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <span className="text-white text-sm font-bold">{index + 1}</span>
+                    </div>
+                    <p className="text-white/70">{text}</p>
                   </div>
-                  <p className="text-muted-foreground">We'll review your requirements and prepare a customized consultation agenda</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-white text-sm font-bold">2</span>
-                  </div>
-                  <p className="text-muted-foreground">Our expert will contact you to schedule a convenient time</p>
-                </div>
-                <div className="flex items-start space-x-3">
-                  <div className="w-6 h-6 bg-primary rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <span className="text-white text-sm font-bold">3</span>
-                  </div>
-                  <p className="text-muted-foreground">We'll conduct a comprehensive consultation and provide actionable recommendations</p>
-                </div>
+                ))}
               </div>
             </div>
             <Button
@@ -173,6 +197,7 @@ const ConsultationForm = () => {
               iconName="ArrowLeft"
               iconPosition="left"
               onClick={() => setIsSubmitted(false)}
+              className="bg-gradient-to-r from-[#e57b46] to-[#B9AEDF] text-white hover:opacity-90 transition-opacity"
             >
               Submit Another Request
             </Button>
@@ -182,8 +207,35 @@ const ConsultationForm = () => {
     );
   }
 
+  // Update the input styles in your theme configuration
+  const inputStyles = {
+    base: "bg-white/5 border-white/20 text-white placeholder-white/50",
+    focus: "focus:border-[#e57b46] focus:ring-[#e57b46]/20",
+    error: "border-red-500/50 focus:border-red-500/50",
+    label: "text-dark/90",
+    helperText: "text-white/60",
+    errorText: "text-red-400"
+  };
+const selectStyles = {
+  control: "bg-white/5 border border-white/20 rounded-xl h-12 px-4 text-white placeholder-white/50 flex items-center justify-between transition-all duration-200 cursor-pointer focus:border-[#e57b46] focus:ring-2 focus:ring-[#e57b46]/30",
+  value: "text-white",
+  placeholder: "text-white/50",
+  dropdown: "bg-[#2A2A42] border-white/20 rounded-xl shadow-xl backdrop-blur-lg mt-1",
+  option: "px-4 py-2 cursor-pointer hover:bg-[#e57b46]/15 text-white/80",
+  selected: "bg-[#e57b46]/25 font-medium text-white",
+};
+
+
+  // Update the checkbox styles
+  const checkboxStyles = {
+    ...inputStyles,
+    base: "border-white/20 bg-white/5",
+    checked: "bg-[#e57b46] border-[#e57b46]",
+    label: "text-white/70"
+  };
+
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-[#2A2A42]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -191,11 +243,11 @@ const ConsultationForm = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Schedule Your Free Consultation
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+            Transform Your Digital Presence
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Tell us about your project and goals. We'll provide personalized recommendations and a detailed proposal tailored to your needs.
+          <p className="text-lg text-white/80 max-w-2xl mx-auto">
+            Get a free marketing strategy session with our experts. We'll analyze your current digital presence and provide actionable insights.
           </p>
         </motion.div>
 
@@ -203,14 +255,14 @@ const ConsultationForm = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-white rounded-3xl shadow-professional-xl p-8 lg:p-12"
+          className="bg-white/10 backdrop-blur-lg rounded-3xl shadow-professional-xl p-8 lg:p-12 border border-white/20"
         >
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* Personal Information */}
             <div>
-              <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center">
-                <Icon name="User" size={20} className="mr-2 text-primary" />
-                Personal Information
+              <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+                <Icon name="User" size={20} className="mr-2 text-[#e57b46]" />
+                Your Information
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Input
@@ -222,6 +274,7 @@ const ConsultationForm = () => {
                   error={errors?.firstName}
                   required
                   placeholder="Enter your first name"
+                  className="bg-white/5 border-white/20 text-white placeholder-white/50 focus:border-[#e57b46]"
                 />
                 <Input
                   label="Last Name"
@@ -232,6 +285,7 @@ const ConsultationForm = () => {
                   error={errors?.lastName}
                   required
                   placeholder="Enter your last name"
+                  className="bg-white/5 border-white/20 text-white placeholder-white/50 focus:border-[#e57b46]"
                 />
                 <Input
                   label="Email Address"
@@ -242,6 +296,7 @@ const ConsultationForm = () => {
                   error={errors?.email}
                   required
                   placeholder="your.email@company.com"
+                  className="bg-white/5 border-white/20 text-white placeholder-white/50 focus:border-[#e57b46]"
                 />
                 <Input
                   label="Phone Number"
@@ -252,14 +307,15 @@ const ConsultationForm = () => {
                   error={errors?.phone}
                   required
                   placeholder="+1 (555) 123-4567"
+                  className="bg-white/5 border-white/20 text-white placeholder-white/50 focus:border-[#e57b46]"
                 />
               </div>
             </div>
 
             {/* Company Information */}
             <div>
-              <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center">
-                <Icon name="Building" size={20} className="mr-2 text-primary" />
+              <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+                <Icon name="Building" size={20} className="mr-2 text-[#e57b46]" />
                 Company Information
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -272,23 +328,29 @@ const ConsultationForm = () => {
                   error={errors?.company}
                   required
                   placeholder="Your company name"
+                  className="bg-white/5 border-white/20 text-white placeholder-white/50 focus:border-[#e57b46]"
                 />
-                <Select
-                  label="Industry"
-                  options={industryOptions}
-                  value={formData?.industry}
-                  onChange={(value) => handleSelectChange('industry', value)}
-                  error={errors?.industry}
-                  required
-                  placeholder="Select your industry"
-                />
+    <Select
+  label="Industry"
+  options={industryOptions}
+  value={formData.industry}
+  onChange={(value) => handleSelectChange('industry', value)}
+  error={errors.industry}
+  required
+  placeholder="Select your industry"
+  className=" border-white/20 text-dark placeholder-dark/50"
+  optionsClassName="border-white/20 text-white"
+
+  />
+
+
               </div>
             </div>
 
             {/* Project Details */}
             <div>
-              <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center">
-                <Icon name="Briefcase" size={20} className="mr-2 text-primary" />
+              <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+                <Icon name="Briefcase" size={20} className="mr-2 text-[#e57b46]" />
                 Project Details
               </h3>
               <div className="space-y-6">
@@ -301,6 +363,9 @@ const ConsultationForm = () => {
                   required
                   placeholder="Select the service you need"
                   searchable
+               className=" border-white/20 text-dark placeholder-dark/50"
+
+                  optionsClassName="bg-[#2A2A42] border-white/20 text-white"
                 />
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <Select
@@ -309,6 +374,9 @@ const ConsultationForm = () => {
                     value={formData?.projectBudget}
                     onChange={(value) => handleSelectChange('projectBudget', value)}
                     placeholder="Select your budget range"
+                     className=" border-white/20 text-dark placeholder-dark/50"
+
+                    optionsClassName="bg-[#2A2A42] border-white/20 text-white"
                   />
                   <Select
                     label="Timeline"
@@ -316,6 +384,9 @@ const ConsultationForm = () => {
                     value={formData?.timeline}
                     onChange={(value) => handleSelectChange('timeline', value)}
                     placeholder="When do you need this completed?"
+                     className=" border-white/20 text-dark placeholder-dark/50"
+
+                    optionsClassName="bg-[#2A2A42] border-white/20 text-white"
                   />
                 </div>
                 <Input
@@ -327,15 +398,15 @@ const ConsultationForm = () => {
                   error={errors?.description}
                   required
                   placeholder="Describe your project, challenges, and goals in detail..."
-                  className="min-h-32"
+                  className="min-h-32 bg-white/5 border-white/20 text-white placeholder-white/50 focus:border-[#e57b46]"
                 />
               </div>
             </div>
 
             {/* Preferences */}
             <div>
-              <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center">
-                <Icon name="Settings" size={20} className="mr-2 text-primary" />
+              <h3 className="text-xl font-semibold text-white mb-6 flex items-center">
+                <Icon name="Settings" size={20} className="mr-2 text-[#e57b46]" />
                 Communication Preferences
               </h3>
               <div className="space-y-6">
@@ -345,6 +416,9 @@ const ConsultationForm = () => {
                   value={formData?.preferredContact}
                   onChange={(value) => handleSelectChange('preferredContact', value)}
                   placeholder="How would you like us to contact you?"
+               className=" border-white/20 text-dark placeholder-dark/50"
+
+                  optionsClassName="bg-[#2A2A42] border-white/20 text-white"
                 />
                 <Checkbox
                   label="Subscribe to our newsletter for industry insights and updates"
@@ -356,22 +430,15 @@ const ConsultationForm = () => {
             </div>
 
             {/* Submit Button */}
-            <div className="pt-6 border-t border-border">
+            <div className="pt-6 border-t border-white/20">
+              {errors?.form && <p className="text-sm text-red-400 text-center mb-4">{errors.form}</p>}
               <Button
                 type="submit"
-                variant="default"
-                size="lg"
                 loading={isSubmitting}
-                iconName="Send"
-                iconPosition="right"
-                fullWidth
-                className="shadow-professional"
+                className="bg-gradient-to-r from-[#e57b46] to-[#B9AEDF]"
               >
-                {isSubmitting ? 'Submitting Request...' : 'Schedule Free Consultation'}
+                {isSubmitting ? 'Submitting...' : 'Get Free Strategy Session'}
               </Button>
-              <p className="text-sm text-muted-foreground text-center mt-4">
-                By submitting this form, you agree to our privacy policy and terms of service.
-              </p>
             </div>
           </form>
         </motion.div>

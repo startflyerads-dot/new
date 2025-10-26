@@ -57,7 +57,7 @@ const OfficeLocations = () => {
   const currentLocation = locations?.[selectedLocation];
 
   return (
-    <section className="py-20 bg-muted">
+    <section className="py-20 bg-[#2A2A42]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -87,8 +87,8 @@ const OfficeLocations = () => {
                   onClick={() => setSelectedLocation(index)}
                   className={`w-full text-left p-6 rounded-2xl transition-all duration-300 animate-elastic-hover ${
                     selectedLocation === index
-                      ? 'bg-white shadow-professional-lg border-2 border-primary'
-                      : 'bg-white hover:shadow-professional border-2 border-transparent hover:border-border'
+                      ? 'bg-white/10 backdrop-blur-lg border-2 border-[#e57b46] shadow-professional-lg'
+                      : 'bg-white/5 hover:bg-white/10 border-2 border-transparent hover:border-white/20'
                   }`}
                 >
                   <div className="flex items-start justify-between">
@@ -121,7 +121,7 @@ const OfficeLocations = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="bg-white rounded-2xl p-8 shadow-professional"
+              className="bg-white/10 backdrop-blur-lg rounded-2xl p-8 shadow-professional border border-white/20"
             >
               <h3 className="text-2xl font-bold text-foreground mb-4">{currentLocation?.name}</h3>
               <p className="text-muted-foreground mb-6">{currentLocation?.description}</p>
@@ -166,7 +166,7 @@ const OfficeLocations = () => {
                       {currentLocation?.specialties?.map((specialty, index) => (
                         <span
                           key={index}
-                          className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full"
+                          className="px-3 py-1 bg-[#e57b46]/10 text-[#e57b46] text-sm rounded-full border border-[#e57b46]/20"
                         >
                           {specialty}
                         </span>
@@ -203,7 +203,7 @@ const OfficeLocations = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="lg:sticky lg:top-8"
           >
-            <div className="bg-white rounded-2xl shadow-professional-lg overflow-hidden">
+            <div className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-professional-lg overflow-hidden border border-white/20">
               <div className="h-96 lg:h-[600px] relative">
                 <iframe
                   width="100%"

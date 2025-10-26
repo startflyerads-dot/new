@@ -1,8 +1,15 @@
-/* Google Fonts */
+/* ----------------------
+   Google Fonts
+----------------------- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* Tailwind Core layers first */
+/* ----------------------
+   Tailwind Core Directives
+   - @tailwind base: Applies Tailwind's base reset and global styles
+   - @tailwind components: Enables component-specific utility classes
+   - @tailwind utilities: Enables low-level utility classes for styling
+----------------------- */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,59 +19,60 @@
 ----------------------- */
 @layer base {
   :root {
-    /* Color Palette */
-    --color-background: #FAFAFA;
-    --color-foreground: #2D2D2D;
-    --color-border: #E5E5E5;
-    --color-card: #FFFFFF;
-    --color-card-foreground: #2D2D2D;
-    --color-primary: #e57b46;
+    /* --- Phoenix Theme Palette --- */
+    --color-background: #2A2A42; /* deep night backdrop */
+    --color-foreground: #FAFAFA;
+    --color-border: #3A3A52;
+    --color-card: #2A2A42;
+    --color-card-foreground: #FFFFFF;
+
+    /* Phoenix Core Colors */
+    --color-primary: #2A2A42; /* Body & Wings (Warm Orange/Red) */
     --color-primary-foreground: #FFFFFF;
-    --color-secondary: #B9AEDF;
+
+    --color-secondary: #B9AEDF; /* Inner Trailing Flame (Muted Purple) */
     --color-secondary-foreground: #1A1A32;
-    --color-accent: #88E5BE;
+
+    --color-accent: #e9bf54; /* Outer Trailing Flame (Light Teal/Green) */
     --color-accent-foreground: #1A1A32;
+
+    /* Feedback Colors */
     --color-success: #88E5BE;
-    --color-success-foreground: #1A1A32;
     --color-warning: #F4A261;
-    --color-warning-foreground: #1A1A32;
     --color-error: #E76F51;
-    --color-error-foreground: #FFFFFF;
     --color-destructive: #E76F51;
     --color-destructive-foreground: #FFFFFF;
-    --color-surface: #2A2A42;
-    --color-surface-foreground: #FFFFFF;
-    --color-dark: #1A1A32;
-    --color-dark-foreground: #FFFFFF;
-    --color-text-primary: #e57b46;
-    --color-text-secondary: #B8B8C8;
-    --color-cta: #E85A4F;
-    --color-cta-foreground: #FFFFFF;
 
-    /* Gradients */
-    --gradient-primary-start: #DD734F;
-    --gradient-primary-end: #1A1A32;
-    --gradient-secondary-start: #B9AEDF;
-    --gradient-secondary-end: #1A1A32;
-    --gradient-accent-start: #88E5BE;
-    --gradient-accent-end: #1A1A32;
+    /* Surface Colors */
+    --color-surface: #24243E;
+    --color-dark: #0E0E1F;
+    --color-dark-foreground: #FFFFFF;
+
+    /* Text Colors */
+    --color-text-primary: var(--color-primary);
+    --color-text-secondary: var(--color-secondary);
+    --color-cta: var(--color-primary);
+    --color-cta-foreground: var(--color-primary-foreground);
+
+    /* Phoenix Gradients */
+    --gradient-primary-start: #e57b46; /* Body */
+    --gradient-primary-end: #B9AEDF;   /* Inner flame */
+    --gradient-secondary-start: #B9AEDF; /* Inner flame */
+    --gradient-secondary-end: #88E5BE;  /* Outer flame */
+    --gradient-accent-start: #88E5BE; /* Outer tail */
+    --gradient-accent-end: #e57b46;   /* Reigniting body hue */
   }
 
-  /* Global styles */
+  /* Global Styles */
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-family: 'Inter', sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter', sans-serif;
     font-weight: 700;
-  }
-
-  .font-mono {
-    font-family: 'JetBrains Mono', monospace;
+    color: var(--color-text-primary);
   }
 }
 
@@ -94,13 +102,7 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
-  /* Animations */
-  .animate-ring-rotate {
-    animation: ring-rotate 2s linear infinite;
-  }
-  .animate-gradient-shift {
-    animation: gradient-shift 4s ease-in-out infinite;
-  }
+  /* Elastic Hover Animation */
   .animate-elastic-hover {
     transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
@@ -113,35 +115,40 @@
     border: 1px solid;
     border-image: linear-gradient(135deg, var(--color-secondary) 0%, transparent 100%) 1;
   }
+
+  /* Phoenix Button */
+  .btn-phoenix {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: var(--color-primary-foreground);
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  .btn-phoenix:hover {
+    background: linear-gradient(135deg, var(--color-accent), var(--color-primary));
+    transform: scale(1.05);
+    box-shadow: 0 0 12px rgba(229, 123, 70, 0.5);
+  }
+
+  /* Phoenix Glow Text */
+  .phoenix-glow {
+    text-shadow: 0 0 8px rgba(229, 123, 70, 0.6),
+                 0 0 16px rgba(185, 174, 223, 0.4),
+                 0 0 24px rgba(136, 229, 190, 0.3);
+  }
+
+  /* Phoenix Border Effect */
+  .border-phoenix {
+    border: 2px solid transparent;
+    border-image: linear-gradient(135deg, var(--color-primary), var(--color-secondary), var(--color-accent)) 1;
+  }
 }
 
 /* ----------------------
    Utilities Layer
 ----------------------- */
 @layer utilities {
-  .text-text-primary {
-    color: var(--color-text-primary);
-  }
-  .text-text-secondary {
-    color: var(--color-text-secondary);
-  }
-  .bg-surface {
-    background-color: var(--color-surface);
-  }
-  .bg-dark {
-    background-color: var(--color-dark);
-  }
-  .bg-cta {
-    background-color: var(--color-cta);
-  }
-  .animate-fade-in-down {
-    animation: fade-in-down 0.5s ease-out forwards;
-  }
-  .animate-fade-in-up {
-    animation: fade-in-up 0.5s ease-out forwards;
-  }
-
-  /* Motion reduce */
   .motion-reduce {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -150,50 +157,7 @@
 }
 
 /* ----------------------
-   Keyframes
------------------------ */
-@keyframes fade-in-down {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes ring-rotate {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes gradient-shift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-/* ----------------------
-   Responsive Typography
+   Responsive Typography & Colors
 ----------------------- */
 @media (max-width: 768px) {
   h1 {
@@ -207,6 +171,41 @@
   h3 {
     font-size: 1.25rem;
     line-height: 1.4;
+  }
+}
+
+/* Desktop: Darker, more muted colors */
+@media (min-width: 769px) {
+  :root {
+    /* Darker Phoenix Core Colors for Desktop */
+    --color-primary: #b85a2b; /* Darker warm orange/red */
+    --color-secondary: #8a7ba8; /* Darker muted purple */
+    --color-accent: #5ba085; /* Darker light teal/green */
+
+    /* Darker Feedback Colors */
+    --color-success: #5ba085;
+    --color-warning: #c47a3e;
+    --color-error: #b84a3a;
+
+    /* Darker Phoenix Gradients */
+    --gradient-primary-start: #b85a2b; /* Darker body */
+    --gradient-primary-end: #8a7ba8;   /* Darker inner flame */
+    --gradient-secondary-start: #8a7ba8; /* Darker inner flame */
+    --gradient-secondary-end: #5ba085;  /* Darker outer flame */
+    --gradient-accent-start: #5ba085; /* Darker outer tail */
+    --gradient-accent-end: #b85a2b;   /* Darker reigniting body hue */
+  }
+
+  /* Darker Phoenix Glow Text for Desktop */
+  .phoenix-glow {
+    text-shadow: 0 0 8px rgba(184, 90, 43, 0.6),
+                 0 0 16px rgba(138, 123, 168, 0.4),
+                 0 0 24px rgba(91, 160, 133, 0.3);
+  }
+
+  /* Darker Phoenix Button Hover for Desktop */
+  .btn-phoenix:hover {
+    box-shadow: 0 0 12px rgba(184, 90, 43, 0.5);
   }
 }
 

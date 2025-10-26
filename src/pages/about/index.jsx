@@ -6,7 +6,7 @@ import CompanyStory from './components/CompanyStory';
 import TeamSection from './components/TeamSection';
 import CompanyCulture from './components/CompanyCulture';
 import AwardsSection from './components/AwardsSection';
-
+import Footer from '../../components/ui/footer';
 const About = () => {
   return (
     <>
@@ -30,6 +30,7 @@ const About = () => {
           <CompanyCulture />
           <AwardsSection />
         </main>
+        <Footer />
       </div>
     </>
   );

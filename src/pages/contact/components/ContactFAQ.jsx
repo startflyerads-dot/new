@@ -53,7 +53,7 @@ const ContactFAQ = () => {
   };
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-[#2A2A42]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -61,11 +61,11 @@ const ContactFAQ = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
             Frequently Asked Questions
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Get answers to common questions about our consultation process and services.
+          <p className="text-lg text-white/80 max-w-2xl mx-auto">
+            Get answers to common questions about our digital marketing services.
           </p>
         </motion.div>
 
@@ -76,19 +76,19 @@ const ContactFAQ = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="bg-white rounded-2xl shadow-professional overflow-hidden"
+              className="bg-white/10 backdrop-blur-lg rounded-2xl shadow-professional border border-white/20 overflow-hidden"
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full px-6 py-6 text-left flex items-center justify-between hover:bg-muted/50 transition-colors duration-200"
+                className="w-full px-6 py-6 text-left flex items-center justify-between hover:bg-white/5 transition-colors duration-200"
               >
-                <h3 className="text-lg font-semibold text-foreground pr-4">
+                <h3 className="text-lg font-semibold text-white pr-4">
                   {faq?.question}
                 </h3>
                 <div className={`transform transition-transform duration-300 ${
                   openFAQ === index ? 'rotate-180' : ''
                 }`}>
-                  <Icon name="ChevronDown" size={20} className="text-primary" />
+                  <Icon name="ChevronDown" size={20} className="text-[#e57b46]" />
                 </div>
               </button>
 
@@ -101,17 +101,17 @@ const ContactFAQ = () => {
                     transition={{ duration: 0.3 }}
                     className="overflow-hidden"
                   >
-                    <div className="px-6 pb-6 border-t border-border">
+                    <div className="px-6 pb-6 border-t border-white/10">
                       <div className="pt-4">
                         {faq?.answer?.split('\n')?.map((line, lineIndex) => (
                           <React.Fragment key={lineIndex}>
                             {line?.startsWith('•') ? (
                               <div className="flex items-start space-x-2 mb-2">
-                                <Icon name="Check" size={16} className="text-primary mt-1 flex-shrink-0" />
-                                <p className="text-muted-foreground">{line?.substring(2)}</p>
+                                <Icon name="Check" size={16} className="text-[#e57b46] mt-1 flex-shrink-0" />
+                                <p className="text-white/70">{line?.substring(2)}</p>
                               </div>
                             ) : line?.trim() ? (
-                              <p className="text-muted-foreground mb-3">{line}</p>
+                              <p className="text-white/70 mb-3">{line}</p>
                             ) : (
                               <div className="mb-2"></div>
                             )}
@@ -133,19 +133,19 @@ const ContactFAQ = () => {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="mt-16 text-center"
         >
-          <div className="bg-gradient-secondary rounded-3xl p-8 lg:p-12">
-            <h3 className="text-2xl font-bold text-secondary-foreground mb-4">
+          <div className="bg-gradient-to-br from-[#e57b46] to-[#B9AEDF] rounded-3xl p-8 lg:p-12">
+            <h3 className="text-2xl font-bold text-white mb-4">
               Still Have Questions?
             </h3>
-            <p className="text-secondary-foreground/80 mb-8 max-w-2xl mx-auto">
-              Our team is here to help! Reach out through any of our contact channels, and we'll get back to you within 2 hours during business hours.
+            <p className="text-white/90 mb-8 max-w-2xl mx-auto">
+              Our digital marketing experts are here to help! Get a response within 2 hours during business hours.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="inline-flex items-center justify-center px-6 py-3 bg-white text-secondary rounded-xl font-medium hover:bg-white/90 transition-colors animate-elastic-hover">
+              <button className="inline-flex items-center justify-center px-6 py-3 bg-white text-[#2A2A42] rounded-xl font-medium hover:bg-white/90 transition-colors animate-elastic-hover">
                 <Icon name="Phone" size={20} className="mr-2" />
                 Call Us Now
               </button>
-              <button className="inline-flex items-center justify-center px-6 py-3 bg-secondary-foreground/20 text-secondary-foreground rounded-xl font-medium hover:bg-secondary-foreground/30 transition-colors animate-elastic-hover">
+              <button className="inline-flex items-center justify-center px-6 py-3 bg-white/20 text-white rounded-xl font-medium hover:bg-white/30 transition-colors animate-elastic-hover backdrop-blur-sm">
                 <Icon name="MessageCircle" size={20} className="mr-2" />
                 Start Live Chat
               </button>

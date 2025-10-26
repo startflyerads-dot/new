@@ -106,13 +106,13 @@ const HeroSection = ({ onOpenConsultation }) => {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-primary">
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#2A2A42]">
       {/* Floating Circles */}
       <div className="absolute inset-0 opacity-10">
         {[
           { top: "top-5", left: "left-4", size: "w-12 h-12 sm:w-20 sm:h-20", color: "bg-white" },
-          { top: "top-16", right: "right-6", size: "w-10 h-10 sm:w-16 sm:h-16", color: "bg-secondary" },
-          { bottom: "bottom-32", left: "left-6", size: "w-14 h-14 sm:w-24 sm:h-24", color: "bg-accent" },
+          { top: "top-16", right: "right-6", size: "w-10 h-10 sm:w-16 sm:h-16", color: "bg-[#B9AEDF]" },
+          { bottom: "bottom-32", left: "left-6", size: "w-14 h-14 sm:w-24 sm:h-24", color: "bg-[#88E5BE]" },
           { bottom: "bottom-16", right: "right-4", size: "w-8 h-8 sm:w-12 sm:h-12", color: "bg-white" },
         ].map((style, idx) => (
           <div
@@ -219,8 +219,8 @@ const HeroSection = ({ onOpenConsultation }) => {
                     <Icon name={stat.icon} size={16} color="white" />
                   </div>
                   <div>
-                    <div className="text-xl font-bold text-foreground">{stat.value}</div>
-                    <div className="text-sm text-muted-foreground">{stat.label}</div>
+                    <div className="text-xl font-bold text-dark">{stat.value}</div>
+                    <div className="text-sm text-dark ">{stat.label}</div>
                   </div>
                 </div>
               </div>
@@ -234,7 +234,8 @@ const HeroSection = ({ onOpenConsultation }) => {
         <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
           <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
         </div>
-      </div>
+       
+        </div>
     </section>
   );
 };

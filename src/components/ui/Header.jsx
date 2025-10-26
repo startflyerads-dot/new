@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { gsap } from 'gsap';
 import Icon from '../AppIcon';
 import Button from './Button';
-
+import logo from '../../assets/images/app.svg';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -88,7 +88,6 @@ const Header = () => {
     { name: 'Home', path: '/homepage', icon: 'Home' },
     { name: 'Services', path: '/services', icon: 'Briefcase' },
     { name: 'About', path: '/about', icon: 'Users' },
-    { name: 'Client Portal', path: '/client-portal', icon: 'Shield' },
     { name: 'Resources', path: '/resources', icon: 'BookOpen' },
   ];
 
@@ -100,25 +99,31 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/95 shadow-md border-b border-border' : 'bg-transparent'
-      }`}
+     className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+  isScrolled
+    ? 'bg-[var(--color-surface)]/80 backdrop-blur-lg shadow-professional-lg border-b border-[var(--color-border)]'
+    : 'bg-[var(--color-dark)]/30 backdrop-blur-md'
+}`}
+
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to="/homepage" className="flex items-center space-x-3" onClick={closeMenu}>
-            <div className="relative">
-              <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center animate-ring-rotate hover:animate-pulse">
-                <Icon name="Zap" size={20} color="white" strokeWidth={2.5} />
-              </div>
-              <div className="absolute inset-0 w-10 h-10 border-2 border-primary/30 rounded-full animate-ping opacity-20" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-bold text-foreground">Startflyerads</span>
-              <span className="text-xs text-primary -mt-1 font-semibold">Digital Marketing Solution</span>
-            </div>
-          </Link>
+              <Link to="/homepage" className="flex items-center" onClick={closeMenu}>
+        {/* Logo Section - Reduced size and removed excessive margin */}
+        <div className="w-20 h-20 flex-shrink-0">
+          <img src={logo} alt="Startflyerads Logo" className="h-full w-full object-contain" />
+        </div>
+        {/* Text Section - Adjusted text and color */}
+        <div className="flex flex-col">
+          {/* Name changed and made primary color, size slightly reduced */}
+          <span className="text-lg font-extrabold text-primary">STARTFLYER ADS</span>
+          {/* Tagline changed and made slightly more subtle */}
+          <span className="text-xs text-muted-foreground font-medium -mt-1">
+            Digital Marketing Agency
+          </span>
+        </div>
+      </Link>
 
           {/* Desktop Navigation */}
      {/* Desktop Navigation - show only on md and larger screens */}

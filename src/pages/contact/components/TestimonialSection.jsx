@@ -67,7 +67,7 @@ const TestimonialSection = () => {
   const currentTest = testimonials?.[currentTestimonial];
 
   return (
-    <section className="py-20 bg-gradient-accent">
+    <section className="py-20 bg-[#2A2A42]">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -75,7 +75,7 @@ const TestimonialSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16">
 
-          <h2 className="text-3xl lg:text-4xl font-bold text-accent-foreground mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
             What Our Clients Say About Our Consultations
           </h2>
           <p className="text-lg text-accent-foreground/80 max-w-2xl mx-auto">
@@ -90,7 +90,7 @@ const TestimonialSection = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="bg-white/95 backdrop-blur-sm rounded-3xl p-8 lg:p-12 shadow-professional-xl">
+            className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 lg:p-12 shadow-professional-xl border border-white/20">
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
               {/* Client Info */}
@@ -132,14 +132,14 @@ const TestimonialSection = () => {
                 </blockquote>
                 
                 {/* Result Highlight */}
-                <div className="bg-success/10 rounded-2xl p-6 border border-success/20">
+                <div className="bg-[#e57b46]/10 rounded-2xl p-6 border border-[#e57b46]/20">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-success/20 rounded-full flex items-center justify-center">
-                      <Icon name="TrendingUp" size={20} className="text-success" />
+                    <div className="w-10 h-10 bg-[#e57b46]/20 rounded-full flex items-center justify-center">
+                      <Icon name="TrendingUp" size={20} className="text-[#e57b46]" />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">Achieved Result</p>
-                      <p className="text-lg font-semibold text-success">{currentTest?.result}</p>
+                      <p className="text-sm text-white/60">Achieved Result</p>
+                      <p className="text-lg font-semibold text-[#e57b46]">{currentTest?.result}</p>
                     </div>
                   </div>
                 </div>
@@ -167,18 +167,18 @@ const TestimonialSection = () => {
             onClick={() => setCurrentTestimonial((prev) =>
             prev === 0 ? testimonials?.length - 1 : prev - 1
             )}
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/80 hover:bg-white rounded-full shadow-professional flex items-center justify-center transition-all duration-300 animate-elastic-hover">
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full border border-white/20 flex items-center justify-center transition-all duration-300 animate-elastic-hover">
 
-            <Icon name="ChevronLeft" size={20} className="text-foreground" />
+            <Icon name="ChevronLeft" size={20} className="text-white" />
           </button>
           
           <button
             onClick={() => setCurrentTestimonial((prev) =>
             (prev + 1) % testimonials?.length
             )}
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/80 hover:bg-white rounded-full shadow-professional flex items-center justify-center transition-all duration-300 animate-elastic-hover">
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full border border-white/20 flex items-center justify-center transition-all duration-300 animate-elastic-hover">
 
-            <Icon name="ChevronRight" size={20} className="text-foreground" />
+            <Icon name="ChevronRight" size={20} className="text-white" />
           </button>
         </div>
 
@@ -189,17 +189,17 @@ const TestimonialSection = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
 
-          <div className="text-center">
-            <div className="text-3xl font-bold text-accent-foreground mb-2">500+</div>
-            <p className="text-accent-foreground/80">Successful Consultations</p>
+          <div className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+            <div className="text-3xl font-bold text-[#e57b46] mb-2">500+</div>
+            <p className="text-white/80">Digital Marketing Projects</p>
           </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-accent-foreground mb-2">95%</div>
-            <p className="text-accent-foreground/80">Client Satisfaction Rate</p>
+          <div className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+            <div className="text-3xl font-bold text-[#e57b46] mb-2">95%</div>
+            <p className="text-white/80">Client Satisfaction Rate</p>
           </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-accent-foreground mb-2">24hrs</div>
-            <p className="text-accent-foreground/80">Average Response Time</p>
+          <div className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
+            <div className="text-3xl font-bold text-[#e57b46] mb-2">24hrs</div>
+            <p className="text-white/80">Average Response Time</p>
           </div>
         </motion.div>
       </div>
