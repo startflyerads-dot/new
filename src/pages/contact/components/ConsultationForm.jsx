@@ -117,46 +117,46 @@ const industryOptions = [
     setErrors(newErrors);
     return Object.keys(newErrors)?.length === 0;
   };
-
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setErrors({});
-    if (typeof validateForm === 'function' && !validateForm()) return;
+  e.preventDefault();
+  setErrors({});
+  if (typeof validateForm === 'function' && !validateForm()) return;
 
-    setIsSubmitting(true);
+  setIsSubmitting(true);
+  try {
+    const response = await fetch('http://localhost:3000/send-email', { // <-- localhost backend
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+
+    const text = await response.text();
+    let result;
     try {
-      const response = await fetch('/.netlify/functions/sendEmail.', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      });
-
-      const text = await response.text();
-      let result;
-      try {
-        result = text ? JSON.parse(text) : {};
-      } catch {
-        result = { error: text || 'Invalid JSON response from server' };
-      }
-
-      if (response.ok) {
-        setIsSubmitted(true);
-        setResult('Form submitted successfully.');
-        // optionally reset form state:
-        // setFormData({ firstName: '', lastName: '', email: '', phone: '', company: '', industry: '', serviceType: '', projectBudget: '', timeline: '', description: '', preferredContact: '', newsletter: false });
-      } else {
-        setErrors(prev => ({ ...prev, form: result?.error || 'Failed to send email' }));
-      }
-    } catch (err) {
-      console.error('submit error:', err);
-      setErrors(prev => ({ ...prev, form: err?.message || 'Error sending email' }));
-    } finally {
-      setIsSubmitting(false);
+      result = text ? JSON.parse(text) : {};
+    } catch {
+      result = { error: text || 'Invalid JSON response from server' };
     }
-  };
+
+    if (response.ok) {
+      setIsSubmitted(true);
+      setResult('Form submitted successfully.');
+      // optionally reset form state:
+      // setFormData({ firstName: '', lastName: '', email: '', phone: '', company: '', industry: '', serviceType: '', projectBudget: '', timeline: '', description: '', preferredContact: '', newsletter: false });
+    } else {
+      setErrors(prev => ({ ...prev, form: result?.error || 'Failed to send email' }));
+    }
+  } catch (err) {
+    console.error('submit error:', err);
+    setErrors(prev => ({ ...prev, form: err?.message || 'Error sending email' }));
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   if (isSubmitted) {
     return (
