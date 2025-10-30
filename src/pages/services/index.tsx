@@ -235,8 +235,13 @@ const ServicesPage: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Our Services | Hiremi</title>
-        <meta name="description" content="Explore our range of services including Digital Marketing, Web Development, App Development, and Graphic Design." />
+        <title>startflyerads — Services | Digital Marketing, Web & App Development</title>
+        <meta name="description" content="startflyerads offers results-driven services: digital marketing, web development, app development, and graphic design to help grow your business." />
+        <meta name="keywords" content="startflyerads, digital marketing, web development, app development, graphic design, SEO, PPC, social media" />
+        <meta property="og:title" content="startflyerads — Services" />
+        <meta property="og:description" content="Explore startflyerads services: SEO, PPC, Social Media, Web & App Development. Tailored digital solutions to scale your business." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://startflyerads.com/services" />
       </Helmet>
 
       <div className="min-h-screen bg-background">

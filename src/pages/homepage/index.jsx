@@ -38,17 +38,17 @@ const Homepage = () => {
   return (
     <>
       <Helmet>
-        <title>ServiceHub Pro - Transform Your Business with Professional Excellence</title>
-        <meta 
-          name="description" 
-          content="Experience the intersection of innovation and expertise. ServiceHub Pro delivers measurable results through cutting-edge solutions tailored to your unique business challenges." 
+        <title>startflyerads - Transform Your Business with Professional Excellence</title>
+        <meta
+          name="description"
+          content="startflyerads delivers measurable digital marketing results — SEO, PPC, social media, and web design tailored to grow your business."
         />
-        <meta name="keywords" content="digital transformation, strategic consulting, technology solutions, business intelligence, professional services" />
-        <meta property="og:title" content="ServiceHub Pro - Transform Your Business" />
-        <meta property="og:description" content="Join hundreds of successful companies that have revolutionized their operations with our expert solutions." />
+        <meta name="keywords" content="startflyerads, digital marketing, SEO, PPC, social media, web design, lead generation" />
+        <meta property="og:title" content="startflyerads - Transform Your Business" />
+        <meta property="og:description" content="Join companies that trust startflyerads for data-driven digital marketing and growth." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://servicehubpro.com/homepage" />
-        <link rel="canonical" href="https://servicehubpro.com/homepage" />
+        <meta property="og:url" content="https://startflyerads.com/homepage" />
+        <link rel="canonical" href="https://startflyerads.com/homepage" />
       </Helmet>
       
       <div className="min-h-screen bg-background text-white">

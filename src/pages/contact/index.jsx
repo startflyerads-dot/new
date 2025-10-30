@@ -12,11 +12,11 @@ const ContactPage = () => {
   return (
     <>
       <Helmet>
-        <title>Contact StartFlyerAds | Your Digital Marketing Partner</title>
-        <meta name="description" content="Transform your digital presence with StartFlyerAds. Schedule a free strategy session with our digital marketing experts. Get personalized solutions for SEO, Social Media, PPC, and more." />
-        <meta name="keywords" content="digital marketing agency, social media marketing, SEO services, PPC management, content marketing, Chennai digital marketing" />
-        <meta property="og:title" content="Contact StartFlyerAds | Your Digital Marketing Partner" />
-        <meta property="og:description" content="Transform your digital presence with StartFlyerAds. Get expert digital marketing solutions tailored to your business goals." />
+        <title>Contact startflyerads | your digital marketing partner</title>
+        <meta name="description" content="Transform your digital presence with startflyerads. Schedule a free strategy session with our digital marketing experts. Get personalized solutions for SEO, Social Media, PPC, and more." />
+        <meta name="keywords" content="startflyerads, digital marketing agency, social media marketing, SEO services, PPC management, content marketing, Chennai digital marketing" />
+        <meta property="og:title" content="Contact startflyerads | your digital marketing partner" />
+        <meta property="og:description" content="Transform your digital presence with startflyerads. Get expert digital marketing solutions tailored to your business goals." />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="/contact" />
       </Helmet>

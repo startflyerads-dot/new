@@ -11,13 +11,16 @@ const About = () => {
   return (
     <>
       <Helmet>
-        <title>About Us - ServiceHub Pro | Professional Excellence & Innovation</title>
-        <meta name="description" content="Discover ServiceHub Pro's journey of innovation, meet our expert team, and explore our company culture. Where professional excellence meets cutting-edge digital innovation." />
-        <meta name="keywords" content="about servicehub pro, company story, team, culture, awards, professional services, innovation, excellence" />
-        <meta property="og:title" content="About Us - ServiceHub Pro" />
-        <meta property="og:description" content="Where professional excellence meets cutting-edge digital innovation. Meet our team and discover our culture of innovation." />
+        <title>About startflyerads - Professional Excellence & Innovation</title>
+        <meta
+          name="description"
+          content="Learn about startflyerads — our mission, team, and culture of innovation. We deliver professional digital marketing services focused on growth."
+        />
+        <meta name="keywords" content="startflyerads, about, team, culture, digital marketing agency, SEO, PPC" />
+        <meta property="og:title" content="About startflyerads" />
+        <meta property="og:description" content="Meet the startflyerads team and learn how we help businesses grow with data-driven marketing." />
         <meta property="og:type" content="website" />
-        <link rel="canonical" href="/about" />
+        <link rel="canonical" href="https://startflyerads.com/about" />
       </Helmet>
 
       <div className="min-h-screen bg-background">
