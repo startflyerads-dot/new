@@ -122,11 +122,11 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/homepage" className="flex items-center gap-3" onClick={() => { closeMenu(); window.scrollTo(0,0); }}>
-            <div className="w-10 h-10 sm:w-14 sm:h-14 flex-shrink-0">
-              <img src={logo} alt="Startflyerads Logo" className="h-full w-full object-contain" />
+            <div className="w-20 h-20 sm:w-20 sm:h-20 flex-shrink-0">
+              <img src={logo} alt="Startflyerads Logo" className=" object-contain" />
             </div>
-            <div className="hidden sm:flex flex-col leading-none">
-              <span className="text-lg font-extrabold text-primary leading-tight">STARTFLYER ADS</span>
+            <div className="flex flex-col leading-none">
+              <span className="text-lg font-extrabold text-[#b85a2b] leading-tight">STARTFLYER ADS</span>
               <span className="text-xs text-muted-foreground font-medium -mt-1">Digital Marketing Agency</span>
             </div>
           </Link>
@@ -189,6 +189,7 @@ const Header = () => {
         }`}
         style={{ transformOrigin: 'top' }}
       >
+
         <nav className="px-4 py-6 space-y-3">
           {navItems.map((item, idx) => (
             <Link
