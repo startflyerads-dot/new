@@ -5,7 +5,7 @@ import Icon from '../../../components/AppIcon';
 import Image from '../../../components/AppImage';
 import Button from '../../../components/ui/Button';
 import ScheduleFreeConsultation from '../../../components/ScheduleFreeConsultation';
-
+import img from '../../../assets/images/hero1.jpeg'
 gsap.registerPlugin(ScrollTrigger);
 
 const HeroSection = ({ onOpenConsultation }) => {
@@ -194,7 +194,7 @@ const HeroSection = ({ onOpenConsultation }) => {
           <div className="relative">
             <div ref={imageRef} className="rounded-xl overflow-hidden shadow-professional-xl">
               <Image
-                src="https://images.unsplash.com/photo-1531537264351-c1952d1db1f5"
+                src={img}
                 alt="Hero"
                 className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] object-cover"
               />

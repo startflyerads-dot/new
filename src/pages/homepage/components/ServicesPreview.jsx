@@ -5,6 +5,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Icon from '../../../components/AppIcon';
 import Image from '../../../components/AppImage';
 import Button from '../../../components/ui/Button';
+import market from '../../../assets/images/market.jpeg';
+import app from '../../../assets/images/app.jpeg';
+import web from '../../../assets/images/web.jpeg';
+import graphic from '../../../assets/images/graphic.jpeg';
 
 gsap?.registerPlugin(ScrollTrigger);
 
@@ -20,7 +24,7 @@ const ServicesPreview = () => {
     title: "Digital Marketing",
     description: "Comprehensive digital marketing solutions to boost your online presence and drive measurable results.",
     icon: "Megaphone",
-    image: "https://images.unsplash.com/photo-1557838923-2985c318be48",
+    image: market,
     imageAlt: "Digital marketing dashboard showing various social media and marketing metrics",
     features: [
       "Social Media Marketing",
@@ -37,7 +41,7 @@ const ServicesPreview = () => {
     title: "Web Development",
     description: "Custom, responsive, and scalable website solutions that deliver exceptional user experiences.",
     icon: "Globe",
-    image: "https://images.unsplash.com/photo-1547658719-da2b51169166",
+    image:web,
     imageAlt: "Web development workspace with responsive design layouts",
     features: [
       "Custom Website Development",
@@ -54,7 +58,7 @@ const ServicesPreview = () => {
     title: "App Development",
     description: "Native and cross-platform mobile applications that engage users and drive business growth.",
     icon: "Smartphone",
-    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c",
+    image: app,
     imageAlt: "Mobile app development process showing multiple device screens",
     features: [
       "iOS Development",
@@ -71,7 +75,7 @@ const ServicesPreview = () => {
     title: "Graphic Design",
     description: "Creative visual solutions that strengthen your brand identity and communicate your message effectively.",
     icon: "Pen",
-    image: "https://images.unsplash.com/photo-1572044162444-ad60f128bdea",
+    image: graphic,
     imageAlt: "Graphic design workspace with branding materials and design tools",
     features: [
       "Brand Identity Design",

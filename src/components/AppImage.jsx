@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/images/app.svg';
+import logo from '../../public/app.svg';
 function Image({
   src,
   alt = "Image Name",

@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 import Icon from '../AppIcon';
 import Button from './Button';
 import ConsultationModal from './ConsultationModal'; // added import
-import logo from '../../assets/images/app.svg';
+import logo from '../../../public/app.svg';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);

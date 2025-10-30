@@ -8,9 +8,7 @@ import TestimonialsCarousel from './components/TestimonialsCarousel';
 import ClientLogos from './components/ClientLogos';
 import ServiceDiscoveryWizard from './components/ServiceDiscoveryWizard';
 import CTASection from './components/CTASection';
-import Icon from '../../components/AppIcon';
 import ConsultationModal from '../../components/ui/ConsultationModal';
-import logo from '../../assets/images/app.svg';
 import Footer from '../../components/ui/footer';
 const Homepage = () => {
   const [consultOpen, setConsultOpen] = useState(false);
