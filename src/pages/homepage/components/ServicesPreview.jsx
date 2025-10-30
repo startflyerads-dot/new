@@ -136,7 +136,7 @@ const ServicesPreview = () => {
             ref={titleRef}
             className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
 
-            Our <span className="bg-gradient-primary bg-clip-text text-transparent">Services</span>
+            Our <span className="bg-gradient-primary bg-clip-text text-white">Services</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Comprehensive solutions designed to transform your business and drive measurable results through innovation and expertise.

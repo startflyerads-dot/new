@@ -291,7 +291,7 @@ const ServiceDiscoveryWizard = () => {
           {/* Header */}
           <div className="text-center mb-12">
             <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              Service <span className="bg-gradient-primary bg-clip-text text-transparent">Discovery Wizard</span>
+              Service <span className="bg-gradient-primary bg-clip-text text-white">Discovery Wizard</span>
             </h2>
             <p className="text-xl text-muted-foreground">
               Answer a few questions to get personalized service recommendations tailored to your business needs
@@ -319,7 +319,7 @@ const ServiceDiscoveryWizard = () => {
           {/* Wizard Content */}
           <div ref={wizardRef} className="bg-card rounded-3xl p-8 lg:p-12 shadow-professional-xl">
             <div className="text-center mb-8">
-              <h3 className="text-2xl lg:text-3xl font-bold text-dark mb-4">
+              <h3 className="text-2xl lg:text-3xl font-bold  mb-4">
                 {currentStepData?.title}
               </h3>
               <p className="text-sx text-muted-foreground">

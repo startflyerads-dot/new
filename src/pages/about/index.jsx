@@ -25,10 +25,7 @@ const About = () => {
         
         <main className="pt-16">
           <HeroSection />
-          <CompanyStory />
           <TeamSection />
-          <CompanyCulture />
-          <AwardsSection />
         </main>
         <Footer />
       </div>

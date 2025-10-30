@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Icon from '../../../components/AppIcon';
 import Image from '../../../components/AppImage';
 import Button from '../../../components/ui/Button';
+import ScheduleFreeConsultation from '../../../components/ScheduleFreeConsultation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,12 +17,19 @@ const HeroSection = ({ onOpenConsultation }) => {
   const floatingElementsRef = useRef([]);
   const trustIndicatorsRef = useRef(null);
   const statsCardsRef = useRef([]);
+  const [showScheduleModal, setShowScheduleModal] = useState(false);
 
   const addToRefs = (el, refArray) => {
     if (el && !refArray.current.includes(el)) {
       refArray.current.push(el);
     }
   };
+
+  // prevent background scroll when modal open
+  useEffect(() => {
+    document.body.style.overflow = showScheduleModal ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [showScheduleModal]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -149,7 +157,7 @@ const HeroSection = ({ onOpenConsultation }) => {
                   if (typeof onOpenConsultation === 'function') {
                     onOpenConsultation();
                   } else {
-                    window.location.href = '/contact';
+                    setShowScheduleModal(true);
                   }
                 }}
               >
@@ -236,6 +244,27 @@ const HeroSection = ({ onOpenConsultation }) => {
         </div>
        
         </div>
+
+      {/* Modal Popup for Scheduling */}
+      {showScheduleModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowScheduleModal(false)} />
+          <div className="relative z-10 w-full max-w-2xl">
+            <div className="p-6">
+              <div className="bg-gradient-to-br from-[#1F2130]/60 to-[#2A2A42]/60 rounded-2xl p-6 border border-white/10 shadow-lg">
+                <div className="flex justify-between items-start mb-4">
+                  <h4 className="text-xl font-semibold text-white">Schedule Free Consultation</h4>
+                  <button onClick={() => setShowScheduleModal(false)} className="text-white/70 hover:text-white">
+                    ✕
+                  </button>
+                </div>
+
+                <ScheduleFreeConsultation onClose={() => setShowScheduleModal(false)} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

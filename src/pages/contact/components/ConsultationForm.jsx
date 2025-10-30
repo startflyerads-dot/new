@@ -124,7 +124,7 @@ const industryOptions = [
 
   setIsSubmitting(true);
   try {
-    const response = await fetch('https://server-ndgd.onrender.com/send-email', { // <-- localhost backend
+    const response = await fetch('https://server-rho-cyan.vercel.app/api/form2', { // <-- localhost backend
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -110,39 +110,31 @@ const CTASection = () => {
       email: form.email,
       company: form.company,
       phone: form.phone,
-      preferredDate: 'N/A',
-      message: `${form.message}\n\nServices of interest: ${form.services.join(', ')}`,
+      services: form.services,
+      message: form.message
     };
 
     try {
-      // Option A — POST to your backend / cloud function that sends email (recommended)
-      // Make sure you deploy the Firebase function (sendConsultation) and proxy /api/consultation to it
-      const res = await fetch('/api/consultation', {
+      const res = await fetch('https://server-rho-cyan.vercel.app/api/form1', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
       });
 
-      if (!res.ok) {
-        const body = await res.json().catch(() => ({}));
-        throw new Error(body?.error || 'Failed to send request');
-      }
+      const text = await res.text();
+      let body;
+      try { body = text ? JSON.parse(text) : {}; } catch { body = { error: text || 'Invalid JSON' }; }
 
-      // success
+      if (!res.ok) throw new Error(body?.error || 'Failed to send request');
+
       setSuccess('Request sent — we will contact you shortly.');
       setForm({ firstName: '', lastName: '', email: '', company: '', phone: '', message: '', services: [] });
-
-      // Option B (alternative): Use EmailJS directly from client (uncomment and configure)
-      // import emailjs from '@emailjs/browser' at top and call:
-      // await emailjs.send(serviceId, templateId, { ...payload, to_email: 'startflyerads@gmail.com' }, publicKey)
-
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(err);
       setError(err?.message || 'Failed to submit form');
     } finally {
       setLoading(false);
-      // auto-clear success after a bit
       setTimeout(() => setSuccess(null), 5000);
       setTimeout(() => setError(null), 7000);
     }
@@ -198,135 +190,171 @@ const CTASection = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Icon name="Users" size={20} />
-                  <span className="text-sm font-medium">500+ Happy Clients</span>
+                  <span className="text-sm font-medium">10+ Happy Clients</span>
                 </div>
               </div>
             </div>
 
             {/* Contact Form */}
             <div ref={formRef}>
-              <div className="bg-white rounded-3xl p-8 lg:p-10 shadow-professional-xl">
+              <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 lg:p-10 border border-white/20 shadow-professional">
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-foreground mb-2">
-                    Get Your Free Consultation
+                  <h3 className="text-2xl font-bold text-white mb-2">
+                    Get Your Free Strategy Session
                   </h3>
-                  <p className="text-muted-foreground">
+                  <p className="text-white/80">
                     Fill out the form below and we'll get back to you within 24 hours
                   </p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid sm:grid-cols-2 gap-4">
-                    <Input
-                      label="First Name"
-                      type="text"
-                      placeholder="John"
+                    <div>
+                      <label className="block text-sm font-medium text-white/80 mb-2">
+                        First Name *
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="John"
+                        required
+                        value={form.firstName}
+                        onChange={(e) => setForm((s) => ({ ...s, firstName: e.target.value }))}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder:text-white/40 focus:border-[#e57b46] focus:ring-2 focus:ring-[#e57b46]/20 transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-white/80 mb-2">
+                        Last Name *
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Doe"
+                        required
+                        value={form.lastName}
+                        onChange={(e) => setForm((s) => ({ ...s, lastName: e.target.value }))}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder:text-white/40 focus:border-[#e57b46] focus:ring-2 focus:ring-[#e57b46]/20 transition-all"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-white/80 mb-2">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="john@company.com"
                       required
-                      value={form.firstName}
-                      onChange={(e) => setForm((s) => ({ ...s, firstName: e.target.value }))}
-                    />
-                    <Input
-                      label="Last Name"
-                      type="text"
-                      placeholder="Doe"
-                      required
-                      value={form.lastName}
-                      onChange={(e) => setForm((s) => ({ ...s, lastName: e.target.value }))}
+                      value={form.email}
+                      onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder:text-white/40 focus:border-[#e57b46] focus:ring-2 focus:ring-[#e57b46]/20 transition-all"
                     />
                   </div>
 
-                  <Input
-                    label="Email Address"
-                    type="email"
-                    placeholder="john.doe@company.com"
-                    required
-                    value={form.email}
-                    onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))}
-                  />
-
-                  <Input
-                    label="Company Name"
-                    type="text"
-                    placeholder="Your Company"
-                    required
-                    value={form.company}
-                    onChange={(e) => setForm((s) => ({ ...s, company: e.target.value }))}
-                  />
-
-                  <Input
-                    label="Phone Number"
-                    type="tel"
-                    placeholder="+1 (555) 123-4567"
-                    value={form.phone}
-                    onChange={(e) => setForm((s) => ({ ...s, phone: e.target.value }))}
-                  />
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-white/80 mb-2">
+                        Company Name
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Your Company"
+                        value={form.company}
+                        onChange={(e) => setForm((s) => ({ ...s, company: e.target.value }))}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder:text-white/40 focus:border-[#e57b46] focus:ring-2 focus:ring-[#e57b46]/20 transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-white/80 mb-2">
+                        Phone Number
+                      </label>
+                      <input
+                        type="tel"
+                        placeholder="+1 (555) 123-4567"
+                        value={form.phone}
+                        onChange={(e) => setForm((s) => ({ ...s, phone: e.target.value }))}
+                        className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder:text-white/40 focus:border-[#e57b46] focus:ring-2 focus:ring-[#e57b46]/20 transition-all"
+                      />
+                    </div>
+                  </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-2">
-                      How can we help you?
+                    <label className="block text-sm font-medium text-white/80 mb-2">
+                      How can we help you? *
                     </label>
                     <textarea
-                      className="w-full px-4 py-3 border border-border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                       rows="4"
-                      placeholder="Tell us about your business challenges and goals..."
+                      placeholder="Tell us about your business goals..."
                       required
                       value={form.message}
                       onChange={(e) => setForm((s) => ({ ...s, message: e.target.value }))}
+                      className="w-full px-4 py-3 bg-white/5 border border-white/20 rounded-xl text-white placeholder:text-white/40 focus:border-[#e57b46] focus:ring-2 focus:ring-[#e57b46]/20 transition-all resize-none"
                     />
                   </div>
 
+                  {/* Services of Interest */}
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-3">
-                      Services of Interest (Optional)
+                    <label className="block text-sm font-medium text-white/80 mb-3">
+                      Services of Interest
                     </label>
                     <div className="grid sm:grid-cols-2 gap-3">
                       {[
-                        'Digital Transformation',
-                        'Strategic Consulting',
-                        'Technology Solutions',
-                        'Business Intelligence'
-                      ]?.map((service) => (
-                        <label key={service} className="flex items-center">
+                        'Digital Marketing',
+                        'Social Media',
+                        'SEO Optimization',
+                        'Content Strategy',
+                        'Paid Ads',
+                        'Web Design'
+                      ].map((service) => (
+                        <label key={service} className="flex items-center space-x-3 cursor-pointer group">
                           <input
                             type="checkbox"
+                            name="services"
                             value={service}
                             checked={form.services.includes(service)}
-                            onChange={(e) => {
-                              const val = e.target.value;
-                              setForm((s) => ({
-                                ...s,
-                                services: s.services.includes(val) ? s.services.filter((x) => x !== val) : [...s.services, val]
-                              }));
-                            }}
-                            className="rounded border-border text-primary focus:ring-primary"
+                            onChange={handleChange('services')}
+                            className="w-5 h-5 text-[#e57b46] bg-white/5 border border-white/20 rounded focus:ring-[#e57b46]/20"
                           />
-                          <span className="ml-2 text-sm text-foreground">{service}</span>
+                          <span className="text-sm text-white/80 group-hover:text-white transition-colors">
+                            {service}
+                          </span>
                         </label>
                       ))}
                     </div>
                   </div>
 
-                  {error && <div className="text-sm text-red-600">{error}</div>}
-                  {success && <div className="text-sm text-green-600">{success}</div>}
+                  {error && (
+                    <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+                      <p className="text-red-400 text-sm text-center">{error}</p>
+                    </div>
+                  )}
 
-                  <Button
+                  {success && (
+                    <div className="p-4 bg-green-500/10 border border-green-500/20 rounded-xl">
+                      <p className="text-green-400 text-sm text-center">{success}</p>
+                    </div>
+                  )}
+
+                  <button
                     type="submit"
-                    variant="default"
-                    size="lg"
-                    fullWidth
-                    iconName="Send"
-                    iconPosition="right"
-                    className="animate-elastic-hover shadow-professional"
                     disabled={loading}
+                    className="w-full py-4 px-6 bg-gradient-to-r from-[#e57b46] to-[#B9AEDF] text-white rounded-xl font-medium hover:opacity-90 transition-all duration-300 disabled:opacity-50 shadow-professional"
                   >
-                    {loading ? 'Sending...' : 'Schedule Free Consultation'}
-                  </Button>
+                    {loading ? (
+                      <span className="flex items-center justify-center">
+                        <Icon name="Loader" className="w-5 h-5 animate-spin mr-2" />
+                        Sending...
+                      </span>
+                    ) : (
+                      'Get Free Strategy Session'
+                    )}
+                  </button>
 
-                  <p className="text-xs text-muted-foreground text-center">
+                  <p className="text-xs text-white/60 text-center">
                     By submitting this form, you agree to our{' '}
-                    <a href="#" className="text-primary hover:underline">Privacy Policy</a>{' '}
-                    and{' '}
-                    <a href="#" className="text-primary hover:underline">Terms of Service</a>
+                    <a href="#" className="text-[#e57b46] hover:underline">Privacy Policy</a>
+                    {' '}and{' '}
+                    <a href="#" className="text-[#e57b46] hover:underline">Terms of Service</a>
                   </p>
                 </form>
               </div>

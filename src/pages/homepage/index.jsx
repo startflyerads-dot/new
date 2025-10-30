@@ -51,7 +51,7 @@ const Homepage = () => {
         <link rel="canonical" href="https://servicehubpro.com/homepage" />
       </Helmet>
       
-      <div className="min-h-screen bg-background text-foreground">
+      <div className="min-h-screen bg-background text-white">
         <Header />
 
         <main className="pt-26 mt-10 sm:pt-20 md:pt-24 lg:pt-28">

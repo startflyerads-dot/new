@@ -142,7 +142,7 @@ const TestimonialsCarousel = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            Client <span className="bg-gradient-primary bg-clip-text text-transparent">Success Stories</span>
+            Client <span className="bg-gradient-primary bg-clip-text text-white">Success Stories</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Discover how we've helped businesses transform their operations and achieve remarkable results through our innovative solutions.

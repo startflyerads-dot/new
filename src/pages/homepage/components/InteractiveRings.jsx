@@ -153,7 +153,7 @@ const InteractiveRings = () => {
   };
 
   return (
-    <section className="p-10 bg-gradient-secondary px-4">
+    <section className="p-10 px-4 bg-[#2A2A42]"> {/* changed background to site dark */}
       <div className="container mx-auto sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
