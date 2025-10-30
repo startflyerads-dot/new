@@ -22,6 +22,7 @@ const Routes = () => {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/homepage" element={<Homepage />} />
+
         </RouterRoutes>
       </ErrorBoundary>
     </BrowserRouter>
