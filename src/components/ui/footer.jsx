@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../AppIcon';
-
+import logo from '../../assets/images/logo.png';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -13,10 +13,12 @@ const Footer = () => {
   ];
 
   const company = [
+    { label: 'Home', href: '/homepage' },
     { label: 'About Us', href: '/about' },
-    { label: 'Resources', href: '/resources' },
-    { label: 'Client Portal', href: '/client-portal' },
-    { label: 'Contact', href: '/contact' }
+    { label: 'Contact', href: '/contact' },
+    { label: 'Terms and Policy', href: '/contact' },
+    { label: 'Privacy and Policy', href: '/contact' },
+    { label: 'Cookie Policy', href: '/contact' },
   ];
 
   const socialLinks = [
@@ -33,11 +35,11 @@ const Footer = () => {
           <div className="space-y-4">
             <Link to="/" className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
-                <Icon name="Zap" color="white" size={18} />
+                <img src={logo} alt="StartFlyerAds Logo" className="w-100"/>
               </div>
               <div>
                 <div className="text-lg sm:text-xl font-bold">StartFlyer<span className="text-primary">Ads</span></div>
-                <div className="text-sm text-white/70">Digital Marketing Solution</div>
+                <div className="text-sm text-white/70">Digital Marketing Agency</div>
               </div>
             </Link>
 

@@ -9,66 +9,106 @@ import { ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 import { motion } from 'framer-motion';
 gsap?.registerPlugin(ScrollTrigger);
 
-const TestimonialsCarousel = () => {
+const TestimonialsCarousel = (props) => {
   const sectionRef = useRef(null);
   const carouselRef = useRef(null);
   const testimonialImageRef = useRef(null);
   const testimonialContentRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
+  // open scheduling flow: prefer provided handler, fallback to Calendly or contact page
+  const scheduleConsultation = () => {
+    // prefer handler if provided
+    if (typeof props?.onOpenConsultation === 'function') {
+      props.onOpenConsultation();
+      return;
+    }
 
-  const testimonials = [
+    // use env var if set otherwise default to Calendly link
+    const raw = process.env.REACT_APP_CALENDLY_URL || 'https://calendly.com/startflyerads/30min';
+    let calendlyUrl = raw;
+
+    // ensure protocol
+    if (!/^[a-zA-Z][a-zA-Z\d+\-.]*:\/\//.test(calendlyUrl)) {
+      calendlyUrl = `https://${calendlyUrl}`;
+    }
+
+    // validate URL, fallback to default if invalid
+    try {
+      // eslint-disable-next-line no-new
+      new URL(calendlyUrl);
+    } catch {
+      calendlyUrl = 'https://calendly.com/startflyerads/30min';
+    }
+
+    // redirect user to the scheduling page (same tab)
+    window.location.href = calendlyUrl;
+  };
+const testimonials = [
   {
     id: 1,
     name: "Sarah Johnson",
-    position: "CEO, TechVision Inc.",
-    company: "TechVision Inc.",
+    position: "CEO, FrenchHome",
+    company: "FrenchHome",
     avatar: "https://images.unsplash.com/photo-1684262855358-88f296a2cfc2",
-    avatarAlt: "Professional headshot of Sarah Johnson, a confident woman with shoulder-length brown hair wearing a navy blue blazer",
-    content: `ServiceHub Pro transformed our entire digital infrastructure. Their strategic approach and technical expertise delivered results beyond our expectations. We saw a 300% increase in operational efficiency within the first quarter.`,
+    avatarAlt:
+      "Professional headshot of Sarah Johnson, a confident woman with shoulder-length brown hair wearing a navy blue blazer",
+    content: `FrenchHome transformed our entire digital infrastructure. Their strategic approach and technical expertise delivered results beyond our expectations. We saw a 300% increase in operational efficiency within the first quarter.`,
     rating: 5,
     results: {
       metric: "Operational Efficiency",
       improvement: "+300%",
-      timeframe: "3 months"
+      timeframe: "3 months",
     },
-    videoThumbnail: "https://images.unsplash.com/photo-1716703435453-a7733d600d68",
-    videoThumbnailAlt: "Modern corporate office meeting room with Sarah Johnson presenting to her team with digital transformation results on large screen"
+    videoThumbnail:
+      "https://images.unsplash.com/photo-1716703435453-a7733d600d68",
+    videoThumbnailAlt:
+      "Modern corporate office meeting room with Sarah Johnson presenting to her team with digital transformation results on large screen",
   },
   {
     id: 2,
     name: "Michael Chen",
-    position: "CTO, InnovateLabs",
-    company: "InnovateLabs",
-    avatar: "https://images.unsplash.com/photo-1687256457585-3608dfa736c5",
-    avatarAlt: "Professional headshot of Michael Chen, an Asian man with short black hair wearing a gray suit and glasses",
-    content: `The level of innovation and attention to detail is remarkable. ServiceHub Pro didn't just deliver a solution; they revolutionized how we approach technology. Our development cycles are now 50% faster with zero compromise on quality.`,
+    position: "CTO, Sam Netlon",
+    company: "Sam Netlon",
+    avatar:
+      "https://images.unsplash.com/photo-1687256457585-3608dfa736c5",
+    avatarAlt:
+      "Professional headshot of Michael Chen, an Asian man with short black hair wearing a gray suit and glasses",
+    content: `The level of innovation and attention to detail is remarkable. Sam Netlon didn't just deliver a solution; they revolutionized how we approach technology. Our development cycles are now 50% faster with zero compromise on quality.`,
     rating: 5,
     results: {
       metric: "Development Speed",
       improvement: "+50%",
-      timeframe: "2 months"
+      timeframe: "2 months",
     },
-    videoThumbnail: "https://images.unsplash.com/photo-1566924534124-f009c8277a1c",
-    videoThumbnailAlt: "Technology development team led by Michael Chen working on multiple monitors with code and development tools in modern office"
+    videoThumbnail:
+      "https://images.unsplash.com/photo-1566924534124-f009c8277a1c",
+    videoThumbnailAlt:
+      "Technology development team led by Michael Chen working on multiple monitors with code and development tools in modern office",
   },
   {
     id: 3,
     name: "Emily Rodriguez",
-    position: "VP Operations, GrowthCorp",
-    company: "GrowthCorp",
-    avatar: "https://images.unsplash.com/photo-1634254698189-6f844a251c23",
-    avatarAlt: "Professional headshot of Emily Rodriguez, a Hispanic woman with long dark hair wearing a white business shirt and confident smile",
-    content: `Working with ServiceHub Pro was a game-changer for our organization. Their strategic consulting helped us identify opportunities we never knew existed. The ROI has been exceptional, with measurable improvements across all key metrics.`,
+    position: "VP Operations, Richmond Dental Care",
+    company: "Richmond Dental Care",
+    avatar:
+      "https://images.unsplash.com/photo-1634254698189-6f844a251c23",
+    avatarAlt:
+      "Professional headshot of Emily Rodriguez, a Hispanic woman with long dark hair wearing a white business shirt and confident smile",
+    content: `Working with Richmond Dental Care was a game-changer for our organization. Their strategic consulting helped us identify opportunities we never knew existed. The ROI has been exceptional, with measurable improvements across all key metrics.`,
     rating: 5,
     results: {
       metric: "Revenue Growth",
       improvement: "+180%",
-      timeframe: "6 months"
+      timeframe: "6 months",
     },
-    videoThumbnail: "https://images.unsplash.com/photo-1716703435453-a7733d600d68",
-    videoThumbnailAlt: "Emily Rodriguez presenting growth metrics and strategic plans to executive team in modern conference room with charts on wall"
-  }];
+    videoThumbnail:
+      "https://images.unsplash.com/photo-1716703435453-a7733d600d68",
+    videoThumbnailAlt:
+      "Emily Rodriguez presenting growth metrics and strategic plans to executive team in modern conference room with charts on wall",
+  },
+];
+
 
 
   useEffect(() => {
@@ -291,23 +331,25 @@ const TestimonialsCarousel = () => {
           <p className="text-lg text-white mb-8 max-w-2xl mx-auto">
             Let's discuss how we can help transform your business and achieve remarkable results together.
           </p>
-          <Button
-  variant="default"
-  size="lg"
-  iconName="Calendar"
-  iconPosition="left"
-  className="bg-white text-primary hover:bg-white/90 shadow-professional-lg animate-elastic-hover w-full sm:w-auto text-center"
-  onClick={() => {
-    // call provided handler if passed via props, otherwise fallback to /contact
-    if (typeof props?.onOpenConsultation === 'function') {
-      props.onOpenConsultation();
-    } else {
-      window.location.href = '/contact';
-    }
-  }}
->
-  Schedule Free Consultation
-</Button>
+         <div className="mt-12 flex justify-center">
+          <a
+            href="https://calendly.com/startflyerads/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block"
+          >
+            <Button
+              variant="default"
+              size="lg"
+              iconName="Calendar"
+              iconPosition="left"
+              className="bg-white text-primary hover:bg-white/90 shadow-professional-lg animate-elastic-hover"
+              aria-label="Schedule Free Consultation"
+            >
+              Schedule Free Consultation
+            </Button>
+            </a>
+            </div>
         </div>
       </div>
     </section>);

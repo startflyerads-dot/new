@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import { useNavigate } from 'react-router-dom';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
 import { Checkbox } from '../../../components/ui/Checkbox';
 
 const ServiceDiscoveryWizard = () => {
+  const navigate = useNavigate();
   const sectionRef = useRef(null);
   const wizardRef = useRef(null);
   const prevStepRef = useRef(0);
@@ -12,6 +14,7 @@ const ServiceDiscoveryWizard = () => {
   const [answers, setAnswers] = useState({});
   const [recommendations, setRecommendations] = useState([]);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [submissionStatus, setSubmissionStatus] = useState('idle');
 
   const wizardSteps = [
     {
@@ -201,6 +204,46 @@ const ServiceDiscoveryWizard = () => {
     setIsCompleted(false);
   };
 
+  const handleSubmitData = async () => {
+    try {
+      setSubmissionStatus('submitting');
+      
+      const formData = {
+        answers,
+        recommendations,
+        timestamp: new Date().toISOString(),
+        metadata: {
+          userAgent: navigator.userAgent,
+          language: navigator.language,
+          screenSize: `${window.innerWidth}x${window.innerHeight}`,
+        }
+      };
+
+      const response = await fetch('/api/submit-wizard', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit data');
+      }
+
+      setSubmissionStatus('success');
+      setTimeout(() => {
+        navigate('/contact', { 
+          state: { wizardData: formData }
+        });
+      }, 1500);
+
+    } catch (error) {
+      console.error('Error submitting data:', error);
+      setSubmissionStatus('error');
+    }
+  };
+
   const currentStepData = wizardSteps?.[currentStep];
   const isStepComplete = currentStepData && (
     currentStepData?.type === 'single-choice' 
@@ -264,9 +307,12 @@ const ServiceDiscoveryWizard = () => {
                 iconName="Calendar"
                 iconPosition="left"
                 className="mr-4 animate-elastic-hover"
+                onClick={handleSubmitData}
+                disabled={submissionStatus === 'submitting'}
               >
-                Schedule Consultation
+                {submissionStatus === 'submitting' ? 'Sending...' : 'Schedule Consultation'}
               </Button>
+              
               <Button
                 variant="outline"
                 size="lg"
@@ -274,9 +320,22 @@ const ServiceDiscoveryWizard = () => {
                 iconPosition="left"
                 className="animate-elastic-hover"
                 onClick={resetWizard}
+                disabled={submissionStatus === 'submitting'}
               >
                 Start Over
               </Button>
+
+              {submissionStatus === 'error' && (
+                <p className="mt-4 text-red-500 text-sm">
+                  Failed to submit data. Please try again.
+                </p>
+              )}
+              
+              {submissionStatus === 'success' && (
+                <p className="mt-4 text-green-500 text-sm">
+                  Data submitted successfully! Redirecting to consultation form...
+                </p>
+              )}
             </div>
           </div>
         </div>

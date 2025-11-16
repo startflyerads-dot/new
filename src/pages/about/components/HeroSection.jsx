@@ -4,10 +4,10 @@ import Icon from '../../../components/AppIcon';
 
 const HeroSection = () => {
   const stats = [
-    { number: "15+", label: "Years of Excellence", icon: "Award" },
-    { number: "500+", label: "Projects Delivered", icon: "CheckCircle" },
+    { number: "1+", label: "Years of Excellence", icon: "Award" },
+    { number: "50+", label: "Projects Delivered", icon: "CheckCircle" },
     { number: "98%", label: "Client Satisfaction", icon: "Heart" },
-    { number: "50+", label: "Industry Awards", icon: "Trophy" }
+    { number: "15+", label: "Industries Served", icon: "Trophy" }
   ];
 
   return (

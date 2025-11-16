@@ -8,15 +8,15 @@ const ContactHero = () => {
       id: 1,
       icon: 'Phone',
       title: 'Phone',
-      value: '+1 (555) 123-4567',
-      description: 'Mon-Fri 9AM-6PM EST',
+      value: '+91 98765 43210',
+      description: 'Mon-Fri 9AM-6PM IST',
       color: 'text-primary'
     },
     {
       id: 2,
       icon: 'Mail',
       title: 'Email',
-      value: 'hello@servicehubpro.com',
+      value: 'startflyerads@gmail.com',
       description: 'We respond within 2 hours',
       color: 'text-secondary'
     },

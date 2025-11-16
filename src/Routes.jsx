@@ -8,6 +8,7 @@ import Resources from "./pages/resources";
 import ContactPage from "./pages/contact";
 import About from "./pages/about";
 import Homepage from "./pages/homepage";
+import cookies from "./pages/cookies";
 
 const Routes = () => {
   return (
@@ -22,7 +23,7 @@ const Routes = () => {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/homepage" element={<Homepage />} />
-
+          <Route path="/cookies" element={cookies()} />
         </RouterRoutes>
       </ErrorBoundary>
     </BrowserRouter>

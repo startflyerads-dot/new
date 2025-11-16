@@ -21,36 +21,6 @@ const OfficeLocations = () => {
       description: 'Our flagship office in the heart of Manhattan, serving clients across the East Coast.',
       team: '25+ consultants',
       specialties: ['Strategy Consulting', 'Digital Transformation', 'Operations']
-    },
-    {
-      id: 2,
-      name: 'San Francisco Office',
-      address: '456 Innovation Drive, Floor 12',
-      city: 'San Francisco, CA 94105',
-      phone: '+1 (555) 987-6543',
-      email: 'sf@servicehubpro.com',
-      hours: 'Mon-Fri: 9:00 AM - 6:00 PM PST',
-      timezone: 'Pacific Time',
-      lat: 37.7749,
-      lng: -122.4194,
-      description: 'Located in the tech hub, specializing in technology and startup consulting.',
-      team: '18+ consultants',
-      specialties: ['Technology Implementation', 'Startup Strategy', 'Growth Marketing']
-    },
-    {
-      id: 3,
-      name: 'Chicago Office',
-      address: '789 Commerce Street, Suite 300',
-      city: 'Chicago, IL 60601',
-      phone: '+1 (555) 456-7890',
-      email: 'chicago@servicehubpro.com',
-      hours: 'Mon-Fri: 9:00 AM - 6:00 PM CST',
-      timezone: 'Central Time',
-      lat: 41.8781,
-      lng: -87.6298,
-      description: 'Serving the Midwest with expertise in manufacturing and logistics optimization.',
-      team: '15+ consultants',
-      specialties: ['Operations Optimization', 'Supply Chain', 'Manufacturing']
     }
   ];
 

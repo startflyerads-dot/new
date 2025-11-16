@@ -190,7 +190,7 @@ const TestimonialSection = () => {
           className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
 
           <div className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
-            <div className="text-3xl font-bold text-[#e57b46] mb-2">500+</div>
+            <div className="text-3xl font-bold text-[#e57b46] mb-2">20+</div>
             <p className="text-white/80">Digital Marketing Projects</p>
           </div>
           <div className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
@@ -199,7 +199,7 @@ const TestimonialSection = () => {
           </div>
           <div className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20">
             <div className="text-3xl font-bold text-[#e57b46] mb-2">24hrs</div>
-            <p className="text-white/80">Average Response Time</p>
+            <p className="text-white/80">Maximun Response Time</p>
           </div>
         </motion.div>
       </div>

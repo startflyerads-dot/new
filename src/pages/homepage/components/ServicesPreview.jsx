@@ -188,6 +188,7 @@ const ServicesPreview = () => {
               </div>
 
               {/* CTA */}
+              <Link to="/services">
               <Button
               variant="outline"
               size="sm"
@@ -197,7 +198,7 @@ const ServicesPreview = () => {
 
                 Learn More
               </Button>
-
+              </Link>
               {/* Hover Overlay */}
               <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300" />
             </div>

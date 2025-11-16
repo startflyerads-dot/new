@@ -2,102 +2,85 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Icon from '../../../components/AppIcon';
 import Image from '../../../components/AppImage';
-
+import dhanushImage from '../../../assets/images/dhanush.jpeg';
+import bharaniImage from '../../../assets/images/bhara.jpeg';
+import samsuddinImage from '../../../assets/images/Samsuddin.jpg';
 const TeamSection = () => {
   const [selectedMember, setSelectedMember] = useState(null);
 
   const teamMembers = [
-    {
-      id: 1,
-      name: "Sarah Chen",
-      position: "Chief Executive Officer",
-      department: "Leadership",
-      image: "https://images.unsplash.com/photo-1684262855358-88f296a2cfc2",
-      imageAlt: "Professional headshot of Asian woman with shoulder-length black hair in navy blazer smiling confidently",
-      bio: `Sarah leads ServiceHub Pro with over 15 years of experience in transforming traditional service industries through innovative technology solutions.\n\nHer vision has guided the company from a startup to an industry leader, focusing on client-centric approaches and measurable results.`,
-      expertise: ["Strategic Leadership", "Digital Transformation", "Client Relations", "Innovation Management"],
-      achievements: ["Forbes 40 Under 40", "Tech Leader of the Year 2023", "Harvard Business Review Contributor"],
-      social: {
-        linkedin: "https://linkedin.com/in/sarahchen",
-        twitter: "https://twitter.com/sarahchen"
-      }
-    },
-    {
-      id: 2,
-      name: "Marcus Rodriguez",
-      position: "Chief Technology Officer",
-      department: "Technology",
-      image: "https://images.unsplash.com/photo-1636955031709-e3a4a671ede8",
-      imageAlt: "Professional headshot of Hispanic man with short dark hair and beard in dark suit jacket",
-      bio: `Marcus drives our technological innovation with expertise in AI, machine learning, and scalable system architecture.\n\nHe has led the development of our proprietary service delivery platform that has revolutionized client experiences.`,
-      expertise: ["AI & Machine Learning", "System Architecture", "Product Development", "Technical Strategy"],
-      achievements: ["MIT Technology Review Innovator", "Patent Holder (12 patents)", "IEEE Fellow"],
-      social: {
-        linkedin: "https://linkedin.com/in/marcusrodriguez",
-        github: "https://github.com/marcusrodriguez"
-      }
-    },
-    {
-      id: 3,
-      name: "Emily Watson",
-      position: "Head of Client Success",
-      department: "Operations",
-      image: "https://images.unsplash.com/photo-1624484631620-9e53e4aed980",
-      imageAlt: "Professional headshot of blonde woman with wavy hair in light blue blouse smiling warmly",
-      bio: `Emily ensures every client achieves exceptional results through our services, maintaining our industry-leading 98% satisfaction rate.\n\nHer client-first approach has established long-term partnerships with Fortune 500 companies worldwide.`,
-      expertise: ["Client Relations", "Project Management", "Quality Assurance", "Team Leadership"],
-      achievements: ["Client Success Leader Award", "PMP Certification", "Customer Experience Excellence"],
-      social: {
-        linkedin: "https://linkedin.com/in/emilywatson",
-        twitter: "https://twitter.com/emilywatson"
-      }
-    },
-    {
-      id: 4,
-      name: "David Kim",
-      position: "Creative Director",
-      department: "Design",
-      image: "https://images.unsplash.com/photo-1638908219964-b94fd11fefcf",
-      imageAlt: "Professional headshot of Asian man with styled black hair in charcoal suit with confident expression",
-      bio: `David leads our design philosophy, creating visually stunning and functionally superior experiences that set industry standards.\n\nHis work has been recognized internationally for innovation in user experience and visual design.`,
-      expertise: ["UX/UI Design", "Brand Strategy", "Creative Leadership", "Design Systems"],
-      achievements: ["Design Excellence Award", "Red Dot Design Winner", "Adobe Creative Resident"],
-      social: {
-        linkedin: "https://linkedin.com/in/davidkim",
-        dribbble: "https://dribbble.com/davidkim"
-      }
-    },
-    {
-      id: 5,
-      name: "Lisa Thompson",
-      position: "Head of Strategy",
-      department: "Strategy",
-      image: "https://images.unsplash.com/photo-1581341038810-5a2fa5b18f6e",
-      imageAlt: "Professional headshot of African American woman with natural hair in burgundy blazer with warm smile",
-      bio: `Lisa develops strategic initiatives that drive sustainable growth and market expansion for ServiceHub Pro.\n\nHer analytical approach and market insights have guided successful launches in 15 international markets.`,
-      expertise: ["Strategic Planning", "Market Analysis", "Business Development", "International Expansion"],
-      achievements: ["Strategy Excellence Award", "MBA Harvard Business School", "McKinsey Alumni"],
-      social: {
-        linkedin: "https://linkedin.com/in/lisathompson",
-        twitter: "https://twitter.com/lisathompson"
-      }
-    },
-    {
-      id: 6,
-      name: "James Wilson",
-      position: "Head of Innovation",
-      department: "Innovation",
-      image: "https://images.unsplash.com/photo-1714974528889-d51109fb6ae9",
-      imageAlt: "Professional headshot of Caucasian man with brown hair and beard in navy blue suit with friendly smile",
-      bio: `James spearheads our innovation lab, exploring emerging technologies and methodologies that shape the future of professional services.\n\nHis research has led to breakthrough solutions that have transformed entire industry sectors.`,
-      expertise: ["Innovation Strategy", "Emerging Technologies", "R&D Leadership", "Future Planning"],
-      achievements: ["Innovation Leader Award", "PhD in Computer Science", "TEDx Speaker"],
-      social: {
-        linkedin: "https://linkedin.com/in/jameswilson",
-        twitter: "https://twitter.com/jameswilson"
-      }
+
+  {
+    id: 4,
+    name: "Akilesh",
+    position: "CEO & Founder",
+    department: "Leadership",
+    image: "https://images.unsplash.com/photo-1638908219964-b94fd11fefcf",
+    imageAlt: "Professional headshot of CEO and Founder",
+    bio: `Akilesh is the visionary CEO and Founder, driving strategic growth and innovation for the organization.\n\nHis expertise in market insights and business expansion has shaped the company's long-term success.`,
+    expertise: [
+      "Strategic Planning",
+      "Market Analysis",
+      "Business Development",
+      "International Expansion"
+    ],
+    achievements: ["Founder’s Excellence Award", "Business Leader Award"],
+    social: {
+      linkedin: "https://linkedin.com",
+      dribbble: "https://dribbble.com"
     }
-  ];
+  },
+   {
+    id: 3,
+    name: "Dhanush Ram",
+    position: "CTO",
+    department: "Technology",
+    image: dhanushImage,
+    imageAlt: "Professional headshot of CTO",
+    bio: `Dhanush Ram leads the technology division with powerful strategic thinking and innovation.\n\nHe specializes in transforming ideas into scalable digital solutions that drive growth and long-term value.`,
+    expertise: [
+      "Strategic Leadership",
+      "Digital Transformation",
+      "Client Relations",
+      "Innovation Management"
+    ],
+    achievements: ["Tech Innovator Award", "Digital Transformation Leader"],
+    social: {
+      linkedin: "https://linkedin.com",
+      twitter: "https://twitter.com"
+    }
+  },
+   {
+    id: 1,
+    name: "Bharani Nagaraj",
+    position: "RJ, Voice Over Artist & News Reader",
+    department: "Media & Communications",
+    image: bharaniImage,
+    imageAlt: "Professional headshot of individual in media communication profile",
+    bio: `Bharani Nagaraj is a dynamic RJ, skilled voice-over artist, and professional news reader.\n\nWith a strong command over communication and presentation, Bharani brings clarity, confidence, and storytelling excellence to every project.`,
+    expertise: ["Anchoring & Hosting", "Voice Over", "News Reading", "Public Communication"],
+    achievements: ["Top RJ Recognition", "Professional Voice Artist Award"],
+    social: {
+      linkedin: "https://linkedin.com",
+      twitter: "https://twitter.com"
+    }
+  },
+  {
+    id: 2,
+    name: "Samsuddin",
+    position: "Camera Man & Video Editor",
+    department: "Media Production",
+    image:samsuddinImage,
+    imageAlt: "Professional headshot of cameraman and video editor",
+    bio: `Samsuddin is an expert cameraman and video editor known for crafting visually appealing content.\n\nHis technical expertise ensures every frame tells a story with clarity, creativity, and precision.`,
+    expertise: ["Videography", "Video Editing", "Cinematography", "Post Production"],
+    achievements: ["Creative Video Editor Award", "Short Film Production Recognition"],
+    social: {
+      linkedin: "https://linkedin.com",
+      github: "https://github.com"
+    }
+  }
+];
 
 
   const departments = ["All", "Leadership", "Technology", "Operations", "Design", "Strategy", "Innovation"];

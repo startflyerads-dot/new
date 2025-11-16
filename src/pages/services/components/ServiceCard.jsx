@@ -74,58 +74,8 @@ const ServiceCard = ({ service, onLearnMore, onGetQuote, index }) => {
           </div>
         </div>
 
-        {/* Pricing */}
-        <div className="mb-6">
-          <div className="flex items-baseline space-x-2">
-            <span className="text-2xl font-bold text-foreground">{service?.pricing?.display}</span>
-            {service?.pricing?.period && (
-              <span className="text-sm text-muted-foreground">/{service?.pricing?.period}</span>
-            )}
-          </div>
-          {service?.pricing?.note && (
-            <p className="text-xs text-muted-foreground mt-1">{service?.pricing?.note}</p>
-          )}
-        </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-4 mb-6 p-4 bg-muted/50 rounded-lg">
-          <div className="text-center">
-            <div className="text-lg font-bold text-primary">{service?.stats?.projects}</div>
-            <div className="text-xs text-muted-foreground">Projects</div>
-          </div>
-          <div className="text-center">
-            <div className="text-lg font-bold text-primary">{service?.stats?.satisfaction}</div>
-            <div className="text-xs text-muted-foreground">Satisfaction</div>
-          </div>
-          <div className="text-center">
-            <div className="text-lg font-bold text-primary">{service?.stats?.timeline}</div>
-            <div className="text-xs text-muted-foreground">Avg Timeline</div>
-          </div>
-        </div>
-
         {/* Action Buttons */}
-        <div className="flex space-x-3">
-          <Button
-            variant="outline"
-            size="sm"
-            iconName="Info"
-            iconPosition="left"
-            className="flex-1"
-            onClick={() => onLearnMore(service)}
-          >
-            Learn More
-          </Button>
-          <Button
-            variant="default"
-            size="sm"
-            iconName="MessageSquare"
-            iconPosition="left"
-            className="flex-1"
-            onClick={() => onGetQuote(service)}
-          >
-            Get Quote
-          </Button>
-        </div>
+       
       </div>
       {/* Hover Animation Ring */}
       <motion.div

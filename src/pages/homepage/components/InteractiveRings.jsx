@@ -20,7 +20,7 @@ const InteractiveRings = () => {
       icon: 'Briefcase',
       path: '/services',
       description: 'Explore our comprehensive service offerings',
-      color: 'bg-primary',
+      color: '#e57b46',
       position: { x: 0, y: -120 }
     },
     {
@@ -29,7 +29,7 @@ const InteractiveRings = () => {
       icon: 'Users',
       path: '/about',
       description: 'Learn about our team and expertise',
-      color: 'bg-secondary',
+      color: '#B9AEDF',
       position: { x: 104, y: -60 }
     },
     {
@@ -38,7 +38,7 @@ const InteractiveRings = () => {
       icon: 'Shield',
       path: '/client-portal',
       description: 'Access your personalized dashboard',
-      color: 'bg-accent',
+      color: '#88E5BE',
       position: { x: 104, y: 60 }
     },
     {
@@ -47,7 +47,7 @@ const InteractiveRings = () => {
       icon: 'BookOpen',
       path: '/resources',
       description: 'Discover tools and insights',
-      color: 'bg-warning',
+      color: '#F2C94C',
       position: { x: 0, y: 120 }
     },
     {
@@ -56,7 +56,7 @@ const InteractiveRings = () => {
       icon: 'Phone',
       path: '/contact',
       description: 'Get in touch with our team',
-      color: 'bg-success',
+      color: '#4ADE80',
       position: { x: -104, y: 60 }
     }
   ];
@@ -173,14 +173,15 @@ const InteractiveRings = () => {
             {/* Center Ring */}
             <div
               ref={centerRingRef}
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-professional-xl cursor-pointer group"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 rounded-full flex items-center justify-center shadow-professional-xl cursor-pointer group"
+              style={{ background: 'linear-gradient(135deg, #e57b46 0%, #B9AEDF 100%)' }}
             >
-              <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 bg-transparent rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <Icon name="Zap" size={24} color="white" />
               </div>
 
               {/* Center Ring Pulse */}
-              <div className="absolute inset-0 rounded-full border-4 border-white/30 animate-ping"></div>
+              <div className="absolute inset-0 rounded-full border-4 border-white/10 animate-ping"></div>
             </div>
 
             {/* Outer Navigation Rings */}
@@ -196,25 +197,32 @@ const InteractiveRings = () => {
                 <div
                   ref={addToOuterRingsRef}
                   data-ring-id={ring?.id}
-                  className={`w-20 h-20 ${ring?.color} rounded-full flex items-center justify-center shadow-professional-lg cursor-pointer group transition-all duration-300 hover:shadow-professional-xl`}
+                  className={`w-20 h-20 rounded-full flex items-center justify-center shadow-professional-lg cursor-pointer group transition-all duration-300 hover:shadow-professional-xl`}
+                  style={{
+                    background: 'linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))',
+                    boxShadow: 'inset 0 0 0 4px rgba(255,255,255,0.02)',
+                    border: `2px solid ${ring?.color}33` // subtle colored border
+                  }}
                   onMouseEnter={() => handleRingHover(ring?.id)}
                   onMouseLeave={() => handleRingLeave(ring?.id)}
                 >
-                  <Icon name={ring?.icon} size={20} color="white" />
+                  <div style={{ width: 36, height: 36, borderRadius: 9999, background: ring?.color, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Icon name={ring?.icon} size={18} color="white" />
+                  </div>
 
                   {/* Ring Glow Effect */}
-                  <div className="absolute inset-0 rounded-full bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-80 transition-opacity duration-300" style={{ background: `${ring?.color}22` }}></div>
                 </div>
 
                 {/* Ring Label */}
                 <div className={`absolute top-full left-1/2 transform -translate-x-1/2 mt-4 transition-all duration-300 ${activeRing === ring?.id ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
-                  <div className="bg-white rounded-lg px-4 py-2 shadow-professional text-center min-w-max">
-                    <div className="font-bold text-foreground text-sm">{ring?.title}</div>
-                    <div className="text-xs text-muted-foreground mt-1">{ring?.description}</div>
+                  <div className="bg-[#0b0b10]/90 rounded-lg px-4 py-2 shadow-professional text-center min-w-max text-white">
+                    <div className="font-bold text-white text-sm">{ring?.title}</div>
+                    <div className="text-xs text-white/70 mt-1">{ring?.description}</div>
                   </div>
 
                   {/* Arrow */}
-                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-white"></div>
+                  <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-[#0b0b10]/90"></div>
                 </div>
               </Link>
             ))}
@@ -228,7 +236,7 @@ const InteractiveRings = () => {
                   y1="50%"
                   x2={`${50 + (ring?.position?.x * scaleFactor / 384) * 100}%`}
                   y2={`${50 + (ring?.position?.y * scaleFactor / 384) * 100}%`}
-                  stroke="rgba(255,255,255,0.2)"
+                  stroke="rgba(255,255,255,0.12)"
                   strokeWidth="2"
                   strokeDasharray="5,5"
                   className={`transition-all duration-300 ${activeRing === ring?.id ? 'stroke-white opacity-60' : 'opacity-20'}`}
