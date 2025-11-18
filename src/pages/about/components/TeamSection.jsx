@@ -5,11 +5,11 @@ import Image from '../../../components/AppImage';
 import dhanushImage from '../../../assets/images/dhanush.jpeg';
 import bharaniImage from '../../../assets/images/bhara.jpeg';
 import samsuddinImage from '../../../assets/images/Samsuddin.jpg';
+import mathishImage from '../../../assets/images/mathish.jpeg';
 const TeamSection = () => {
   const [selectedMember, setSelectedMember] = useState(null);
 
   const teamMembers = [
-
   {
     id: 4,
     name: "Akilesh",
@@ -19,10 +19,10 @@ const TeamSection = () => {
     imageAlt: "Professional headshot of CEO and Founder",
     bio: `Akilesh is the visionary CEO and Founder, driving strategic growth and innovation for the organization.\n\nHis expertise in market insights and business expansion has shaped the company's long-term success.`,
     expertise: [
-      "Strategic Planning",
-      "Market Analysis",
-      "Business Development",
-      "International Expansion"
+      "Visionary Leadership",
+      "Product Innovation",
+      "Market Disruption",
+      "Team Empowerment"
     ],
     achievements: ["Founder’s Excellence Award", "Business Leader Award"],
     social: {
@@ -30,27 +30,47 @@ const TeamSection = () => {
       dribbble: "https://dribbble.com"
     }
   },
-   {
+  {
     id: 3,
     name: "Dhanush Ram",
-    position: "CTO",
-    department: "Technology",
+    position: "CSO / Investing Founder",
+    department: "Strategy",
     image: dhanushImage,
-    imageAlt: "Professional headshot of CTO",
-    bio: `Dhanush Ram leads the technology division with powerful strategic thinking and innovation.\n\nHe specializes in transforming ideas into scalable digital solutions that drive growth and long-term value.`,
+    imageAlt: "Professional headshot of CSO",
+    bio: `Dhanush Ram leads the strategy division with deep analytical thinking and long-term vision.\n\nHe focuses on investment planning, strategic decisions, and scaling opportunities that help the organization grow sustainably.`,
     expertise: [
       "Strategic Leadership",
-      "Digital Transformation",
-      "Client Relations",
-      "Innovation Management"
+      "Decision Making",
+      "Growth Planning",
+      "Business Scaling"
     ],
-    achievements: ["Tech Innovator Award", "Digital Transformation Leader"],
+    achievements: ["Tech Innovator Award", "Strategic Excellence Award"],
     social: {
       linkedin: "https://linkedin.com",
       twitter: "https://twitter.com"
     }
   },
-   {
+  {
+    id: 10,
+    name: "Mathish",
+    position: "CRO / Client Relationships",
+    department: "Client & Partnership Management",
+    image: mathishImage,
+    imageAlt: "Professional headshot of CRO",
+    bio: `Mathish is the Chief Relationship Officer specializing in strong client partnerships and business collaborations.\n\nHe ensures long-term customer satisfaction and builds meaningful relationships that drive business growth.`,
+    expertise: [
+      "Client Acquisition",
+      "Partnership Building",
+      "Relationship Management",
+      "Customer Engagement"
+    ],
+    achievements: ["Top Client Strategist Award", "Relationship Excellence Recognition"],
+    social: {
+      linkedin: "https://linkedin.com",
+      twitter: "https://twitter.com"
+    }
+  },
+  {
     id: 1,
     name: "Bharani Nagaraj",
     position: "RJ, Voice Over Artist & News Reader",
@@ -70,7 +90,7 @@ const TeamSection = () => {
     name: "Samsuddin",
     position: "Camera Man & Video Editor",
     department: "Media Production",
-    image:samsuddinImage,
+    image: samsuddinImage,
     imageAlt: "Professional headshot of cameraman and video editor",
     bio: `Samsuddin is an expert cameraman and video editor known for crafting visually appealing content.\n\nHis technical expertise ensures every frame tells a story with clarity, creativity, and precision.`,
     expertise: ["Videography", "Video Editing", "Cinematography", "Post Production"],
@@ -81,6 +101,7 @@ const TeamSection = () => {
     }
   }
 ];
+
 
 
   const departments = ["All", "Leadership", "Technology", "Operations", "Design", "Strategy", "Innovation"];
