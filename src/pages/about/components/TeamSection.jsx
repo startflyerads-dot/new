@@ -6,6 +6,7 @@ import dhanushImage from '../../../assets/images/dhanush.jpeg';
 import bharaniImage from '../../../assets/images/bhara.jpeg';
 import samsuddinImage from '../../../assets/images/Samsuddin.jpg';
 import mathishImage from '../../../assets/images/mathish.jpeg';
+import akileshImage from '../../../assets/images/akhilesh.webp';
 const TeamSection = () => {
   const [selectedMember, setSelectedMember] = useState(null);
 
@@ -15,7 +16,7 @@ const TeamSection = () => {
     name: "Akilesh",
     position: "CEO & Founder",
     department: "Leadership",
-    image: "https://images.unsplash.com/photo-1638908219964-b94fd11fefcf",
+    image: akileshImage,
     imageAlt: "Professional headshot of CEO and Founder",
     bio: `Akilesh is the visionary CEO and Founder, driving strategic growth and innovation for the organization.\n\nHis expertise in market insights and business expansion has shaped the company's long-term success.`,
     expertise: [
@@ -50,7 +51,7 @@ const TeamSection = () => {
       twitter: "https://twitter.com"
     }
   },
-  {
+  { 
     id: 10,
     name: "Mathish",
     position: "CRO / Client Relationships",
