@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Privacy from "../../components/ui/privacy";
+import Privacy from "../../components/ui/Privacy";
 
 const PrivacyPage = () => {
   return (

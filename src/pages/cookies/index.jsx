@@ -1,16 +1,18 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-
+import Header from "../../components/ui/Header";  
+import Footer from "../../components/ui/footer";
 const CookiesPage = () => {
   return (
     <>
+      <Header/>
       <Helmet>
         <title>Cookie Policy — startflyerads</title>
         <meta name="description" content="Learn about the cookies startflyerads uses and how to manage them." />
         <link rel="canonical" href="/cookies" />
       </Helmet>
 
-      <main className="py-16">
+      <main className="py-16 mt-16" >
         <div className="container mx-auto px-4">
           <section className="bg-card p-6 rounded-2xl border border-border">
             <h1 className="text-2xl font-bold mb-4">Cookie Policy</h1>
@@ -39,6 +41,7 @@ const CookiesPage = () => {
           </section>
         </div>
       </main>
+      <Footer/>
     </>
   );
 };

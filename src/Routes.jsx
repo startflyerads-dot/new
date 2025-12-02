@@ -9,6 +9,7 @@ import ContactPage from "./pages/contact";
 import About from "./pages/about";
 import Homepage from "./pages/homepage";
 import cookies from "./pages/cookies";
+import Privacy from "./pages/privacy";
 
 const Routes = () => {
   return (
@@ -24,6 +25,7 @@ const Routes = () => {
           <Route path="/about" element={<About />} />
           <Route path="/homepage" element={<Homepage />} />
           <Route path="/cookies" element={cookies()} />
+          <Route path="/privacy" element={<Privacy />} />
         </RouterRoutes>
       </ErrorBoundary>
     </BrowserRouter>
