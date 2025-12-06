@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FileText, ShieldAlert, Scale, CreditCard, Ban, Mail } from 'lucide-react';
 import Header from '../../components/ui/Header';
-import Footer from '../../components/ui/Footer';
+import Footer from '../../components/ui/footer';
 
 export default function TermsPage() {
   // Theme colors kept for compatibility if needed elsewhere
