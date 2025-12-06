@@ -9,18 +9,18 @@ const OfficeLocations = () => {
   const locations = [
     {
       id: 1,
-      name: 'New York Headquarters',
-      address: '123 Business Avenue, Suite 500',
-      city: 'New York, NY 10001',
-      phone: '+1 (555) 123-4567',
-      email: 'ny@servicehubpro.com',
-      hours: 'Mon-Fri: 9:00 AM - 6:00 PM EST',
-      timezone: 'Eastern Time',
-      lat: 40.7128,
-      lng: -74.0060,
-      description: 'Our flagship office in the heart of Manhattan, serving clients across the East Coast.',
-      team: '25+ consultants',
-      specialties: ['Strategy Consulting', 'Digital Transformation', 'Operations']
+      name: 'Startflyer Ads Office',
+      address: 'Tech Hub Building, Business District',
+      city: 'Coimbatore, Tamil Nadu 641001',
+      phone: '+91 98765 43210',
+      email: 'startflyerads@gmail.com',
+      hours: 'Mon-Fri: 9:00 AM - 6:00 PM IST',
+      timezone: 'Indian Standard Time (IST)',
+      lat: 11.0081,
+      lng: 76.9877,
+      description: 'Our headquarters in Coimbatore, serving innovative digital marketing and advertising solutions across India and beyond.',
+      team: '15+ digital experts',
+      specialties: ['Digital Marketing', 'Advertising Solutions', 'Social Media Strategy']
     }
   ];
 
@@ -36,10 +36,10 @@ const OfficeLocations = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            Visit Our Offices
+            Visit Our Office
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Meet our team in person at one of our strategically located offices across the United States.
+            Meet our team in person at our Coimbatore headquarters for expert digital marketing and advertising solutions.
           </p>
         </motion.div>
 
@@ -57,7 +57,7 @@ const OfficeLocations = () => {
                   onClick={() => setSelectedLocation(index)}
                   className={`w-full text-left p-6 rounded-2xl transition-all duration-300 animate-elastic-hover ${
                     selectedLocation === index
-                      ? 'bg-white/10 backdrop-blur-lg border-2 border-[#e57b46] shadow-professional-lg'
+                      ? 'bg-white/10 backdrop-blur-lg border-2 border-primary shadow-professional-lg'
                       : 'bg-white/5 hover:bg-white/10 border-2 border-transparent hover:border-white/20'
                   }`}
                 >
@@ -107,12 +107,16 @@ const OfficeLocations = () => {
 
                 <div className="flex items-center space-x-3">
                   <Icon name="Phone" size={20} className="text-primary" />
-                  <p className="text-foreground">{currentLocation?.phone}</p>
+                  <a href={`tel:${currentLocation?.phone}`} className="text-foreground hover:text-primary transition-colors">
+                    {currentLocation?.phone}
+                  </a>
                 </div>
 
                 <div className="flex items-center space-x-3">
                   <Icon name="Mail" size={20} className="text-primary" />
-                  <p className="text-foreground">{currentLocation?.email}</p>
+                  <a href={`mailto:${currentLocation?.email}`} className="text-foreground hover:text-primary transition-colors">
+                    {currentLocation?.email}
+                  </a>
                 </div>
 
                 <div className="flex items-start space-x-3">
@@ -136,7 +140,7 @@ const OfficeLocations = () => {
                       {currentLocation?.specialties?.map((specialty, index) => (
                         <span
                           key={index}
-                          className="px-3 py-1 bg-[#e57b46]/10 text-[#e57b46] text-sm rounded-full border border-[#e57b46]/20"
+                          className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full border border-primary/20"
                         >
                           {specialty}
                         </span>
@@ -197,24 +201,32 @@ const OfficeLocations = () => {
 
             {/* Quick Actions */}
             <div className="mt-6 grid grid-cols-2 gap-4">
-              <Button
-                variant="outline"
-                iconName="Phone"
-                iconPosition="left"
-                fullWidth
-                className="justify-center"
+              <a
+                href={`tel:${currentLocation?.phone}`}
               >
-                Call Now
-              </Button>
-              <Button
-                variant="outline"
-                iconName="Mail"
-                iconPosition="left"
-                fullWidth
-                className="justify-center"
+                <Button
+                  variant="outline"
+                  iconName="Phone"
+                  iconPosition="left"
+                  fullWidth
+                  className="justify-center"
+                >
+                  Call Now
+                </Button>
+              </a>
+              <a
+                href={`mailto:${currentLocation?.email}`}
               >
-                Send Email
-              </Button>
+                <Button
+                  variant="outline"
+                  iconName="Mail"
+                  iconPosition="left"
+                  fullWidth
+                  className="justify-center"
+                >
+                  Send Email
+                </Button>
+              </a>
             </div>
           </motion.div>
         </div>

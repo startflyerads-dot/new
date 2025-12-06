@@ -4,8 +4,8 @@ import Footer from '../ui/footer'
 
 export default function Privacy() {
   // default theme color (can be changed centrally)
-  const primaryColor = '#dc6a19ff'; // teal-cyan
-  const primaryText = '#ffffffff'; // dark foreground for buttons
+  const primaryColor = '#06b6d4'; // teal-cyan
+  const primaryText = '#0f1724'; // dark foreground for buttons
 
   return (
     <>

@@ -16,9 +16,9 @@ const Footer = () => {
     { label: 'Home', href: '/homepage' },
     { label: 'About Us', href: '/about' },
     { label: 'Contact', href: '/contact' },
-    { label: 'Terms and Policy', href: '/contact' },
-    { label: 'Privacy and Policy', href: '/contact' },
-    { label: 'Cookie Policy', href: '/contact' },
+    { label: 'Terms and Policy', href: '/terms' },
+    { label: 'Privacy and Policy', href: '/privacy' },
+    { label: 'Cookie Policy', href: '/cookie' },
   ];
 
   const socialLinks = [
@@ -141,7 +141,7 @@ const Footer = () => {
             <Link to="/terms" className="text-white/50 hover:text-primary transition-colors">
               Terms of Service
             </Link>
-            <Link to="/cookies" className="text-white/50 hover:text-primary transition-colors">
+            <Link to="/cookie" className="text-white/50 hover:text-primary transition-colors">
               Cookie Policy
             </Link>
           
