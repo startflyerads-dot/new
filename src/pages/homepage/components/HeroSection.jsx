@@ -114,45 +114,59 @@ const HeroSection = ({ onOpenConsultation }) => {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#2A2A42]">
-      {/* Floating Circles */}
-      <div className="absolute inset-0 opacity-10">
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+      {/* Dynamic Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-primary/20 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-secondary/20 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
+      </div>
+
+      {/* Floating Elements */}
+      <div className="absolute inset-0 opacity-20 pointer-events-none">
         {[
-          { top: "top-5", left: "left-4", size: "w-12 h-12 sm:w-20 sm:h-20", color: "bg-white" },
-          { top: "top-16", right: "right-6", size: "w-10 h-10 sm:w-16 sm:h-16", color: "bg-[#B9AEDF]" },
-          { bottom: "bottom-32", left: "left-6", size: "w-14 h-14 sm:w-24 sm:h-24", color: "bg-[#88E5BE]" },
-          { bottom: "bottom-16", right: "right-4", size: "w-8 h-8 sm:w-12 sm:h-12", color: "bg-white" },
+          { top: "top-20", left: "left-[10%]", size: "w-4 h-4", color: "bg-primary" },
+          { top: "top-[40%]", right: "right-[15%]", size: "w-3 h-3", color: "bg-secondary" },
+          { bottom: "bottom-[20%]", left: "left-[20%]", size: "w-5 h-5", color: "bg-accent" },
+          { bottom: "bottom-[40%]", right: "right-[10%]", size: "w-2 h-2", color: "bg-white" },
         ].map((style, idx) => (
           <div
             key={idx}
             ref={(el) => addToRefs(el, floatingElementsRef)}
-            className={`absolute ${style.top || ""} ${style.bottom || ""} ${style.left || ""} ${style.right || ""} ${style.size} ${style.color} rounded-full`}
+            className={`absolute ${style.top || ""} ${style.bottom || ""} ${style.left || ""} ${style.right || ""} ${style.size} ${style.color} rounded-full filter blur-[1px]`}
           />
         ))}
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20 lg:pt-0">
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-24">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <div className="text-center lg:text-left">
-            <h1 ref={titleRef} className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-              Transform Your Business with
-              <span className="block bg-gradient-accent bg-clip-text text-transparent mt-2">
-                Professional Excellence
+            <div ref={trustIndicatorsRef} className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-bold text-emerald-500 uppercase tracking-widest mb-6 backdrop-blur-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              Premium Hiking Experiences
+            </div>
+
+            <h1 ref={titleRef} className="text-4xl sm:text-6xl lg:text-7xl font-black text-white mb-8 leading-[1.1] tracking-tight uppercase">
+              Discover the <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-teal-500">
+                Wild Side of HK
               </span>
             </h1>
 
-            <p ref={subtitleRef} className="text-base sm:text-lg lg:text-xl text-white/90 mb-8 max-w-2xl mx-auto lg:mx-0">
-              Experience the intersection of innovation and expertise. We deliver measurable results through cutting-edge solutions tailored to your unique business challenges.
+            <p ref={subtitleRef} className="text-lg sm:text-xl text-zinc-400 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+              Connecting travelers with the authentic, wild side of Hong Kong through sustainable and personalized walking tours.
             </p>
 
-            <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
+            <div ref={ctaRef} className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
               <Button
                 variant="default"
                 size="lg"
-                iconName="Calendar"
-                iconPosition="left"
-                className="bg-white text-primary hover:bg-white/90 shadow-professional-lg w-full sm:w-auto"
+                iconName="Mountain"
+                iconPosition="right"
+                className="bg-emerald-600 text-white hover:scale-105 transition-transform duration-300 shadow-[0_0_20px_rgba(16,185,129,0.3)] h-14 px-8 text-lg font-bold uppercase tracking-widest"
                 onClick={() => {
                   if (typeof onOpenConsultation === 'function') {
                     onOpenConsultation();
@@ -161,101 +175,103 @@ const HeroSection = ({ onOpenConsultation }) => {
                   }
                 }}
               >
-                Schedule Free Consultation
+                Book a Tour
               </Button>
 
               <Button
                 variant="outline"
                 size="lg"
-                iconName="Play"
+                iconName="Compass"
                 iconPosition="left"
-                className="border-white text-white hover:bg-white hover:text-primary w-full sm:w-auto"
+                className="border-white/10 text-white hover:bg-white/5 backdrop-blur-sm h-14 px-8 text-lg font-bold uppercase tracking-widest"
               >
-                Watch Demo
+                Our Trails
               </Button>
             </div>
 
-            {/* Trust Indicators */}
-            <div ref={trustIndicatorsRef} className="flex flex-wrap justify-center lg:justify-start gap-4 text-white/80 text-sm">
+            {/* Quick Stats */}
+            <div className="mt-12 flex flex-wrap justify-center lg:justify-start gap-8 border-t border-white/5 pt-8">
               {[
-                { icon: "Shield", label: "SSL Secured" },
-                { icon: "Award", label: "Industry Certified" },
-                { icon: "Users", label: "500+ Happy Clients" },
-              ].map(({ icon, label }, idx) => (
-                <div key={idx} className="flex items-center gap-2">
-                  <Icon name={icon} size={18} />
-                  <span>{label}</span>
+                { label: "Trails Explored", value: "50+" },
+                { label: "Guides", value: "12" },
+                { label: "Success Rate", value: "100%" },
+              ].map((stat, idx) => (
+                <div key={idx} className="flex flex-col">
+                  <span className="text-2xl font-black text-white">{stat.value}</span>
+                  <span className="text-xs font-bold text-zinc-500 uppercase tracking-widest">{stat.label}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Right Image + Stats */}
-          <div className="relative">
-            <div ref={imageRef} className="rounded-xl overflow-hidden shadow-professional-xl">
+          <div className="relative group">
+            <div ref={imageRef} className="relative rounded-2xl overflow-hidden border border-white/10 bg-zinc-900 aspect-square sm:aspect-video lg:aspect-square">
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10" />
               <Image
                 src={img}
-                alt="Hero"
-                className="w-full h-64 sm:h-80 md:h-96 lg:h-[500px] object-cover"
+                alt="HK Local Tours - Sustainable Hiking"
+                className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-700 group-hover:scale-110"
               />
             </div>
 
-            {/* Floating Stats */}
-            {[
-              {
-                pos: "top-[-1rem] left-[-1rem] sm:top-[-1.5rem] sm:left-[-1.5rem]",
-                icon: "TrendingUp",
-                value: "98%",
-                label: "Success Rate",
-                bg: "bg-success"
-              },
-              {
-                pos: "bottom-[-1rem] right-[-1rem] sm:bottom-[-1.5rem] sm:right-[-1.5rem]",
-                icon: "Clock",
-                value: "24/7",
-                label: "Support",
-                bg: "bg-primary"
-              }
-            ].map((stat, i) => (
-              <div
-                key={i}
-                ref={(el) => addToRefs(el, statsCardsRef)}
-                className={`absolute ${stat.pos} bg-white rounded-lg p-3 sm:p-4 shadow-professional-lg`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className={`w-10 h-10 ${stat.bg} rounded-full flex items-center justify-center`}>
-                    <Icon name={stat.icon} size={16} color="white" />
-                  </div>
-                  <div>
-                    <div className="text-xl font-bold text-dark">{stat.value}</div>
-                    <div className="text-sm text-dark ">{stat.label}</div>
-                  </div>
+            {/* Floating Interaction Cards */}
+            <div
+              ref={(el) => addToRefs(el, statsCardsRef)}
+              className="absolute -top-6 -right-6 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl hidden sm:block"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                  <Icon name="Mountain" className="text-emerald-500" size={24} />
+                </div>
+                <div>
+                  <div className="text-xl font-black text-white">Wild HK</div>
+                  <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Sustainability</div>
                 </div>
               </div>
-            ))}
+            </div>
+
+            <div
+              ref={(el) => addToRefs(el, statsCardsRef)}
+              className="absolute -bottom-6 -left-6 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl hidden sm:block"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-lg bg-secondary/20 flex items-center justify-center">
+                  <Icon name="Zap" className="text-secondary" size={24} />
+                </div>
+                <div>
+                  <div className="text-xl font-black text-white">Fast-Track</div>
+                  <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Implementation</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator - Hidden on mobile */}
-      <div className="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce hidden sm:block">
-        <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-white/50 rounded-full mt-2 animate-pulse"></div>
-        </div>
-       
-        </div>
+      {/* Scroll Down */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 pointer-events-none opacity-50">
+        <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.3em] vertical-text">Scroll To Explore</span>
+        <div className="w-[2px] h-12 bg-gradient-to-b from-primary to-transparent" />
+      </div>
 
       {/* Modal Popup for Scheduling */}
       {showScheduleModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowScheduleModal(false)} />
-          <div className="relative z-10 w-full max-w-2xl">
-            <div className="p-6">
-              <div className="bg-gradient-to-br from-[#1F2130]/60 to-[#2A2A42]/60 rounded-2xl p-6 border border-white/10 shadow-lg">
-                <div className="flex justify-between items-start mb-4">
-                  <h4 className="text-xl font-semibold text-white">Schedule Free Consultation</h4>
-                  <button onClick={() => setShowScheduleModal(false)} className="text-white/70 hover:text-white">
-                    ✕
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-background/90 backdrop-blur-md" onClick={() => setShowScheduleModal(false)} />
+          <div className="relative z-[101] w-full max-w-2xl animate-fade-in-up">
+            <div className="p-1 rounded-3xl bg-gradient-to-br from-primary/50 to-secondary/50 shadow-2xl">
+              <div className="bg-background rounded-[1.4rem] p-8 border border-white/5">
+                <div className="flex justify-between items-start mb-8">
+                  <div>
+                    <h4 className="text-3xl font-black text-white mb-2 uppercase tracking-widest">Plan Your Hike</h4>
+                    <p className="text-zinc-500">Let's discuss how we can show you the wild side of HK.</p>
+                  </div>
+                  <button
+                    onClick={() => setShowScheduleModal(false)}
+                    className="p-2 rounded-full bg-white/5 text-white/70 hover:text-white hover:bg-white/10 transition-all"
+                  >
+                    <Icon name="X" size={24} />
                   </button>
                 </div>
 

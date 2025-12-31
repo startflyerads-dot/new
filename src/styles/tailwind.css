@@ -19,59 +19,61 @@
 ----------------------- */
 @layer base {
   :root {
-    /* --- Phoenix Theme Palette --- */
-    --color-background: #2A2A42; /* deep night backdrop */
-    --color-foreground: #FAFAFA;
-    --color-border: #3A3A52;
-    --color-card: #2A2A42;
-    --color-card-foreground: #FFFFFF;
+    /* --- Premium Modern Palette --- */
+    --color-background: #09090b; /* Deep night backdrop */
+    --color-foreground: #fafafa;
+    --color-border: #27272a;
+    --color-card: rgba(12, 12, 15, 0.7);
+    --color-card-foreground: #ffffff;
 
-    /* Phoenix Core Colors */
-    --color-primary: #2A2A42; /* Body & Wings (Warm Orange/Red) */
-    --color-primary-foreground: #FFFFFF;
+    /* Core Brand Colors */
+    --color-primary: #e57b46; /* Vibrant Sunset Orange */
+    --color-primary-foreground: #ffffff;
 
-    --color-secondary: #B9AEDF; /* Inner Trailing Flame (Muted Purple) */
-    --color-secondary-foreground: #1A1A32;
+    --color-secondary: #b9aedf; /* Soft Lavender */
+    --color-secondary-foreground: #09090b;
 
-    --color-accent: #e9bf54; /* Outer Trailing Flame (Light Teal/Green) */
-    --color-accent-foreground: #1A1A32;
+    --color-accent: #88e5be; /* Fresh Mint */
+    --color-accent-foreground: #09090b;
 
     /* Feedback Colors */
-    --color-success: #88E5BE;
-    --color-warning: #F4A261;
-    --color-error: #E76F51;
-    --color-destructive: #E76F51;
-    --color-destructive-foreground: #FFFFFF;
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+    --color-destructive: #ef4444;
+    --color-destructive-foreground: #ffffff;
 
-    /* Surface Colors */
-    --color-surface: #24243E;
-    --color-dark: #0E0E1F;
-    --color-dark-foreground: #FFFFFF;
+    /* Surface & Special Colors */
+    --color-surface: #18181b;
+    --color-dark: #000000;
+    --color-dark-foreground: #ffffff;
 
     /* Text Colors */
-    --color-text-primary: var(--color-primary);
-    --color-text-secondary: var(--color-secondary);
-    --color-cta: var(--color-primary);
-    --color-cta-foreground: var(--color-primary-foreground);
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #a1a1aa;
+    --color-cta: #e57b46;
+    --color-cta-foreground: #ffffff;
 
-    /* Phoenix Gradients */
-    --gradient-primary-start: #e57b46; /* Body */
-    --gradient-primary-end: #B9AEDF;   /* Inner flame */
-    --gradient-secondary-start: #B9AEDF; /* Inner flame */
-    --gradient-secondary-end: #88E5BE;  /* Outer flame */
-    --gradient-accent-start: #88E5BE; /* Outer tail */
-    --gradient-accent-end: #e57b46;   /* Reigniting body hue */
+    /* Premium Gradients */
+    --gradient-primary-start: #e57b46;
+    --gradient-primary-end: #b9aedf;
+    --gradient-brand: linear-gradient(135deg, #e57b46 0%, #b9aedf 100%);
+    --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
   }
 
   /* Global Styles */
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
+    font-weight: 800;
+    letter-spacing: -0.025em;
     color: var(--color-text-primary);
   }
 }

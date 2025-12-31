@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../public/app.svg';
+
 function Image({
   src,
   alt = "Image Name",
@@ -13,7 +13,7 @@ function Image({
       alt={alt}
       className={className}
       onError={(e) => {
-        e.target.src = logo;
+        e.target.src = '/app.svg';
       }}
       {...props}
     />

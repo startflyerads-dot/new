@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useAuth } from '../../context/AuthContext';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import Icon from '../AppIcon';
 import Button from './Button';
 import ConsultationModal from './ConsultationModal'; // added import
-import logo from '../../../public/app.svg';
+import logo from '/app.svg';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -12,6 +13,7 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const firstMobileLinkRef = useRef(null);
+  const headerRef = useRef(null);
   const desktopNavRef = useRef([]);
   const mobileNavRef = useRef([]);
 
@@ -97,13 +99,18 @@ const Header = () => {
     }
   }, [isMenuOpen]);
 
+  const { user, isAdmin, logout } = useAuth();
+
   const navItems = [
-    { name: 'Home', path: '/homepage', icon: 'Home' },
-    { name: 'Services', path: '/services', icon: 'Briefcase' },
-    { name: 'About', path: '/about', icon: 'Users' },
+    { name: 'Hiking', path: '/all-tours', icon: 'Mountain' },
+    { name: 'Explore', path: '/journal', icon: 'Compass' },
+    { name: 'Company', path: '/about', icon: 'Users' },
+    { name: 'Newsletter', path: '#newsletter', icon: 'Mail' },
   ];
 
-  const secondaryItems = [{ name: 'Contact', path: '/contact', icon: 'Phone' }];
+  if (isAdmin) {
+    navItems.push({ name: 'Admin', path: '/admin-portal', icon: 'ShieldCheck' });
+  }
 
   const isActive = (path) => location.pathname === path;
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
@@ -111,23 +118,26 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-[var(--color-surface)]/90 backdrop-blur-lg shadow-professional-lg border-b border-[var(--color-border)]'
-          : 'bg-[var(--color-dark)]/40 backdrop-blur-md'
-      }`}
-      aria-hidden={false}
+      ref={headerRef}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+          ? 'py-4 bg-zinc-950/80 backdrop-blur-xl border-b border-white/5 shadow-2xl'
+          : 'py-8 bg-transparent'
+        }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to="/homepage" className="flex items-center gap-3" onClick={() => { closeMenu(); window.scrollTo(0,0); }}>
-            <div className="w-20 h-20 sm:w-20 sm:h-20 flex-shrink-0">
-              <img src={logo} alt="Startflyerads Logo" className=" object-contain" />
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="flex items-center justify-between">
+          {/* Brand Logo */}
+          <Link to="/homepage" className="flex items-center gap-4 group relative z-50">
+            <div className="w-10 h-10 flex-shrink-0 transition-transform duration-500 group-hover:scale-110">
+              <img src={logo} alt="HK Local Tours Logo" className="w-full h-full object-contain filter brightness-0 invert" />
             </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-lg font-extrabold text-[#b85a2b] leading-tight">STARTFLYER ADS</span>
-              <span className="text-xs text-muted-foreground font-medium -mt-1">Digital Marketing Agency</span>
+            <div className="flex flex-col">
+              <span className="text-xl font-black text-white tracking-widest uppercase leading-none mb-1">
+                HK Local Tours
+              </span>
+              <span className="text-[8px] font-black text-emerald-500 uppercase tracking-[0.4em] opacity-80">
+                Sustainable Exploration
+              </span>
             </div>
           </Link>
 
@@ -138,11 +148,10 @@ const Header = () => {
                 key={item.path}
                 to={item.path}
                 ref={(el) => (desktopNavRef.current[idx] = el)}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition min-w-[110px] justify-center ${
-                  isActive(item.path)
-                    ? 'bg-primary text-dark shadow'
-                    : 'text-foreground hover:text-primary hover:bg-muted'
-                }`}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition min-w-[110px] justify-center ${isActive(item.path)
+                  ? 'bg-primary text-dark shadow'
+                  : 'text-foreground hover:text-primary hover:bg-muted'
+                  }`}
               >
                 <Icon name={item.icon} size={16} />
                 <span>{item.name}</span>
@@ -153,20 +162,23 @@ const Header = () => {
           {/* Actions + Mobile Menu Button */}
           <div className="flex items-center space-x-3">
             {/* Desktop actions */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Link to="/contact" className="text-sm font-medium text-muted-foreground hover:text-primary">
-                Contact
-              </Link>
-              <Button
-                variant="default"
-                size="sm"
-                iconName="Calendar"
-                iconPosition="left"
-                className="shadow-sm"
-                onClick={() => navigate('/contact')} // redirect to contact
+            <div className="hidden md:flex items-center space-x-6">
+              {!user ? (
+                <Link to="/login" className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 hover:text-white transition-colors">
+                  Secure Entry
+                </Link>
+              ) : (
+                <button onClick={logout} className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-500 hover:text-primary transition-colors">
+                  Sign Out
+                </button>
+              )}
+
+              <button
+                onClick={() => setIsConsultOpen(true)}
+                className="bg-gradient-brand text-white px-8 py-3 rounded-full text-[10px] font-black uppercase tracking-[0.2em] hover:scale-105 active:scale-95 transition-all shadow-lg shadow-primary/20"
               >
-                Schedule
-              </Button>
+                Consultation
+              </button>
             </div>
 
             {/* Mobile hamburger */}
@@ -184,9 +196,8 @@ const Header = () => {
 
       {/* Mobile Menu - full screen slide-down with better spacing */}
       <div
-        className={`md:hidden fixed inset-x-0 top-16 bg-[var(--color-dark)] border-t border-border transition-transform duration-320 z-50 ${
-          isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-6 opacity-0 pointer-events-none'
-        }`}
+        className={`md:hidden fixed inset-x-0 top-16 bg-[var(--color-dark)] border-t border-border transition-transform duration-320 z-50 ${isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-6 opacity-0 pointer-events-none'
+          }`}
         style={{ transformOrigin: 'top' }}
       >
 
@@ -197,11 +208,10 @@ const Header = () => {
               to={item.path}
               onClick={() => { closeMenu(); }}
               ref={(el) => (mobileNavRef.current[idx] = el)}
-              className={`flex items-center space-x-3 px-4 py-3 rounded-lg text-base font-medium transition ${
-                isActive(item.path)
-                  ? 'bg-primary text-white shadow'
-                  : 'text-foreground hover:text-primary hover:bg-muted'
-              }`}
+              className={`flex items-center space-x-3 px-4 py-3 rounded-lg text-base font-medium transition ${isActive(item.path)
+                ? 'bg-primary text-white shadow'
+                : 'text-foreground hover:text-primary hover:bg-muted'
+                }`}
             >
               <Icon name={item.icon} size={20} />
               <span>{item.name}</span>
@@ -209,16 +219,25 @@ const Header = () => {
           ))}
 
           <div className="pt-4 border-t border-border">
-            <Link
-              to="/contact"
-              onClick={closeMenu}
-              className="block px-4 py-3 rounded-lg text-base font-medium text-foreground hover:text-primary hover:bg-muted"
-            >
-              Contact
-            </Link>
+            {!user ? (
+              <Link
+                to="/login"
+                onClick={closeMenu}
+                className="block px-4 py-3 rounded-lg text-base font-medium text-foreground hover:text-primary hover:bg-muted"
+              >
+                Secure Entry
+              </Link>
+            ) : (
+              <button
+                onClick={() => { logout(); closeMenu(); }}
+                className="block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-foreground hover:text-primary hover:bg-muted"
+              >
+                Sign Out
+              </button>
+            )}
 
             <button
-              onClick={() => { navigate('/contact'); closeMenu(); }}
+              onClick={() => { setIsConsultOpen(true); closeMenu(); }}
               className="mt-3 w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-[#e57b46] to-[#B9AEDF] text-white rounded-lg"
             >
               <Icon name="Calendar" size={18} />

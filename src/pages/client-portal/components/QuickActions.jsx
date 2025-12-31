@@ -1,65 +1,62 @@
 import React from 'react';
-import Button from '../../../components/ui/Button';
+import Icon from '../../../components/AppIcon';
 
 const QuickActions = () => {
   const actions = [
     {
       id: 1,
-      title: "Schedule Meeting",
-      description: "Book a consultation with your team",
+      title: "Schedule Sync",
+      description: "Book a strategic consultation",
       icon: "Calendar",
-      variant: "default",
-      action: () => console.log("Schedule meeting")
+      theme: "text-primary bg-primary/10 border-primary/20",
     },
     {
       id: 2,
-      title: "Upload Documents",
-      description: "Share files with your project team",
+      title: "File Transfer",
+      description: "Share assets with your team",
       icon: "Upload",
-      variant: "outline",
-      action: () => console.log("Upload documents")
+      theme: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
     },
     {
       id: 3,
-      title: "Request Support",
-      description: "Get help from our support team",
+      title: "Concierge Support",
+      description: "Priority assistance request",
       icon: "HelpCircle",
-      variant: "secondary",
-      action: () => console.log("Request support")
+      theme: "text-purple-400 bg-purple-500/10 border-purple-500/20",
     },
     {
       id: 4,
-      title: "View Invoices",
-      description: "Access billing and payment history",
+      title: "Financial Center",
+      description: "Invoices and history",
       icon: "Receipt",
-      variant: "outline",
-      action: () => console.log("View invoices")
+      theme: "text-orange-400 bg-orange-500/10 border-orange-500/20",
     }
   ];
 
   return (
-    <div className="bg-card rounded-xl border border-border p-6 shadow-professional">
-      <h3 className="text-lg font-semibold text-card-foreground mb-6">Quick Actions</h3>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {actions?.map((action) => (
-          <div key={action?.id} className="group">
-            <Button
-              variant={action?.variant}
-              fullWidth
-              iconName={action?.icon}
-              iconPosition="left"
-              onClick={action?.action}
-              className="h-auto p-4 flex-col items-start text-left animate-elastic-hover group-hover:shadow-professional"
-            >
-              <div className="w-full">
-                <div className="font-medium mb-1">{action?.title}</div>
-                <div className="text-xs opacity-80 font-normal">{action?.description}</div>
-              </div>
-            </Button>
+    <>
+      {actions?.map((action) => (
+        <button
+          key={action?.id}
+          className="relative group p-6 rounded-3xl bg-zinc-900/40 border border-white/5 backdrop-blur-3xl hover:bg-zinc-900/60 transition-all duration-500 text-left overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+
+          <div className="relative z-10">
+            <div className={`w-12 h-12 rounded-xl flex items-center justify-center border mb-6 group-hover:scale-110 transition-transform duration-500 ${action.theme}`}>
+              <Icon name={action?.icon} size={20} />
+            </div>
+
+            <h4 className="text-sm font-black text-white uppercase tracking-widest mb-1 group-hover:text-primary transition-colors">
+              {action?.title}
+            </h4>
+            <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest leading-relaxed">
+              {action?.description}
+            </p>
           </div>
-        ))}
-      </div>
-    </div>
+        </button>
+      ))}
+    </>
   );
 };
 

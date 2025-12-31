@@ -36,19 +36,19 @@ const Homepage = () => {
   return (
     <>
       <Helmet>
-        <title>startflyerads - Transform Your Business with Professional Excellence</title>
+        <title>HK Local Tours — Discover the Authentic, Wild Hong Kong</title>
         <meta
           name="description"
-          content="startflyerads delivers measurable digital marketing results — SEO, PPC, social media, and web design tailored to grow your business."
+          content="Explore Hong Kong's trails with sustainable and personalized walking tours. Connecting travelers with the wild side of HK through professional local guidance."
         />
-        <meta name="keywords" content="startflyerads, digital marketing, SEO, PPC, social media, web design, lead generation" />
-        <meta property="og:title" content="startflyerads - Transform Your Business" />
-        <meta property="og:description" content="Join companies that trust startflyerads for data-driven digital marketing and growth." />
+        <meta name="keywords" content="HK Local Tours, Hong Kong hiking, sustainable tourism HK, local walking tours, Hong Kong nature, personalized hikes" />
+        <meta property="og:title" content="HK Local Tours — Authentic Hong Kong Hikes" />
+        <meta property="og:description" content="Discover the wild side of Hong Kong with personalized, sustainable hiking tours led by expert local guides." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://startflyerads.com/homepage" />
-        <link rel="canonical" href="https://startflyerads.com/homepage" />
+        <meta property="og:url" content="https://hklocaltours.com/" />
+        <link rel="canonical" href="https://hklocaltours.com/" />
       </Helmet>
-      
+
       <div className="min-h-screen bg-background text-white">
         <Header />
 

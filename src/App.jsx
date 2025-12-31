@@ -1,17 +1,14 @@
 import React from "react";
-import { useState } from 'react'
+import { AuthProvider } from "./context/AuthContext";
 import Routes from "./Routes";
 import "./App.css"
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      
+    <AuthProvider>
       <Routes />
-    </>
-  )
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;
